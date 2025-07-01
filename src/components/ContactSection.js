@@ -14,7 +14,7 @@ const ContactSection = ({ isVisible }) => (
             src={aImg}
             alt="Contact profile"
             className="w-full h-full object-cover shadow-lg"
-            style={{ minHeight: '550px', maxHeight: '480px' }}
+            style={{ minHeight: '510px', maxHeight: '480px' }}
           />
         </div>
         <div className={`space-y-8 transition-all duration-1000 delay-300 ${
@@ -22,7 +22,7 @@ const ContactSection = ({ isVisible }) => (
         }`}>
           <h2 className="text-4xl font-bold">Get in touch</h2>
           <p className="text-xl text-gray-300 leading-relaxed">
-            If you want to work together, you can reach me at ghmannadityak56@gmail.com.
+            If you want to work together, you can reach me at dhimanaditya56@gmail.com.
           </p>
           <div className="space-y-4">
             <a 
