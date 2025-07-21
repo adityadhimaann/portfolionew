@@ -40,6 +40,7 @@ const skillsData = [
 
 const achievements = [
   { title: "Hackathon Finalist", year: "2025", icon: <Trophy /> },
+  { title: "Leetcode & CodeChef Expert", icon: <Star /> },
 ];
 
 const QualificationsSection = () => {
