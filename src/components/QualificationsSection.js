@@ -16,7 +16,7 @@ const educationData = [
   {
     degree: "Software Engineering Internship",
     institution: "Larsen & Toubro",
-    period: "2024 – Present",
+    period: "2025 – Present",
     status: "Active",
     location: "Remote",
     icon: <Briefcase />,
@@ -39,9 +39,7 @@ const skillsData = [
 ];
 
 const achievements = [
-  { title: "Dean's List", year: "2024", icon: <Award /> },
-  { title: "Hackathon Winner", year: "2024", icon: <Trophy /> },
-  { title: "Open Source Contributor", year: "2023-24", icon: <Star /> },
+  { title: "Hackathon Finalist", year: "2025", icon: <Trophy /> },
 ];
 
 const QualificationsSection = () => {
