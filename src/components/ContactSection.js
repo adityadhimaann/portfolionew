@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 import { Mail, MapPin, Send, Github, Instagram, Linkedin, Code, Terminal, Zap, Coffee } from 'lucide-react';
 
 // You can keep using require if it works for your setup
@@ -56,6 +56,7 @@ const ContactSection = () => {
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       setSendStatus('Failed to send message. Please try again.');
+      console.error('EmailJS error:', error);
     }
     setSending(false);
   };
