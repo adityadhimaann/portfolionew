@@ -52,7 +52,7 @@ const ContactSection = () => {
         from_email: formData.email,
         message: formData.message,
       }, userID);
-      setSendStatus('🚀 Dashing Developer: Your message has been sent successfully!');
+      setSendStatus('🚀Your message has been sent successfully!');
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       setSendStatus('Failed to send message. Please try again.');
@@ -230,7 +230,7 @@ const ContactSection = () => {
                 </span>
               </button>
               {sendStatus && (
-                <div className={`mt-2 text-sm font-mono ${sendStatus.includes('Dashing Developer') ? 'text-green-400' : 'text-red-400'}`}>{sendStatus}</div>
+                <div className={`mt-2 text-sm font-mono ${sendStatus.includes('') ? 'text-green-400' : 'text-red-400'}`}>{sendStatus}</div>
               )}
             </div>
             
