@@ -85,7 +85,7 @@ const QualificationsSection = () => {
     <section
       id="qualifications"
       ref={sectionRef}
-      className="relative min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 font-mono flex items-center py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 font-mono flex items-center py-12 sm:py-20 md:py-24 px-2 sm:px-4 md:px-6 lg:px-8 overflow-hidden"
     >
       {/* Enhanced Background Pattern */}
       <div className="absolute inset-0 z-0">
@@ -134,10 +134,10 @@ const QualificationsSection = () => {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-12 xl:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12 xl:gap-16">
           
           {/* Left Column: Education & Achievements */}
-          <div className={`lg:col-span-2 space-y-8 transition-all duration-1000 ease-out ${
+          <div className={`col-span-1 md:col-span-2 lg:col-span-2 space-y-8 transition-all duration-1000 ease-out ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
           }`}>
             
@@ -214,7 +214,7 @@ const QualificationsSection = () => {
           </div>
 
           {/* Right Column: Skills */}
-          <div className={`lg:col-span-3 space-y-8 transition-all duration-1000 ease-out delay-200 ${
+          <div className={`col-span-1 md:col-span-2 lg:col-span-3 space-y-8 transition-all duration-1000 ease-out delay-200 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
           }`}>
             
@@ -228,7 +228,7 @@ const QualificationsSection = () => {
               </h3>
               
               {/* Skill Categories Filter */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-row flex-nowrap overflow-x-auto gap-2 pb-2 md:flex-wrap md:overflow-visible">
                 {skillCategories.map((category) => (
                   <button
                     key={category.id}
@@ -246,7 +246,7 @@ const QualificationsSection = () => {
               </div>
 
               {/* Skills Grid */}
-              <div className="grid gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
                 {filteredSkills.map((skill, index) => (
                   <div
                     key={index}
