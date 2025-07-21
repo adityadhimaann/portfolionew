@@ -130,7 +130,7 @@ const HeroSection = ({ scrollToSection }) => {
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <span className="relative flex items-center justify-center">
                   <Terminal className="w-5 h-5 mr-3" />
-                  ./contact --init
+                  ./contact
                   <Mail className="w-5 h-5 ml-3 transition-transform duration-300 group-hover:-translate-x-1" />
                 </span>
               </button>
