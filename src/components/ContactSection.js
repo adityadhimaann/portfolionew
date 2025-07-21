@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import emailjs from 'emailjs-com';
 import { Mail, MapPin, Send, Github, Instagram, Linkedin, Code, Terminal, Zap, Coffee } from 'lucide-react';
 
 // You can keep using require if it works for your setup
@@ -8,6 +9,8 @@ const ContactSection = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isVisible, setIsVisible] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendStatus, setSendStatus] = useState(null);
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -36,10 +39,25 @@ const ContactSection = () => {
     setTimeout(() => setIsTyping(false), 1000);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Form submitted!\nName: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`);
-    setFormData({ name: '', email: '', message: '' });
+    setSending(true);
+    setSendStatus(null);
+    try {
+      const serviceID = 'service_hwudj9v';
+      const templateID = 'template_6qv3vkm';
+      const userID = 'OoxmLqCS3D2VgNTfw';
+      await emailjs.send(serviceID, templateID, {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+      }, userID);
+      setSendStatus('Message sent successfully!');
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      setSendStatus('Failed to send message. Please try again.');
+    }
+    setSending(false);
   };
 
   return (
@@ -200,15 +218,19 @@ const ContactSection = () => {
               <button 
                 type="submit" 
                 onClick={handleSubmit}
-                className="group w-full relative overflow-hidden bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-mono font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 border border-cyan-400/50"
+                disabled={sending}
+                className={`group w-full relative overflow-hidden bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-mono font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 border border-cyan-400/50 ${sending ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <span className="relative flex items-center justify-center">
                   <Terminal className="w-5 h-5 mr-3" />
-                  Execute Send()
+                  {sending ? 'Sending...' : 'Execute Send()'}
                   <Send className="w-5 h-5 ml-3 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
               </button>
+              {sendStatus && (
+                <div className={`mt-2 text-sm font-mono ${sendStatus.includes('success') ? 'text-green-400' : 'text-red-400'}`}>{sendStatus}</div>
+              )}
             </div>
             
             {/* Enhanced Social Links & Info */}
