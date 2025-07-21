@@ -46,7 +46,7 @@ const journeyData = [
     ariaLabel: "Google Cloud Developers Day 2025 at GDG Noida"
   },
   {
-    title: "Google Cloud Developers Day 2",
+    title: "Google Cloud Developers Day",
     role: "@GDG Noida",
     location: "Noida, Uttar Pradesh",
     image: require('../assets/gdg2.jpg'),
@@ -109,21 +109,22 @@ const JourneyCard = ({ item, isVisible, delay }) => {
             }}
           ></div>
           {/* Card inner content area with styles for both modes */}
-          <div className="relative bg-white dark:bg-slate-900 w-full h-full rounded-xl overflow-hidden p-5 border border-slate-200 dark:border-slate-800">
-            <div className="aspect-w-4 aspect-h-3 mb-5 overflow-hidden rounded-lg">
+          <div className="relative bg-white dark:bg-slate-900 w-full h-full rounded-xl overflow-hidden p-4 sm:p-5 border border-slate-200 dark:border-slate-800">
+            <div className="aspect-w-4 aspect-h-3 mb-4 sm:mb-5 overflow-hidden rounded-lg">
               <img
                 src={item.image}
                 alt={item.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
+                style={{ maxHeight: '220px', width: '100%', objectFit: 'cover' }}
               />
             </div>
             <div className="space-y-2">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white leading-tight">{item.title}</h3>
-              <p className="font-semibold text-indigo-600 dark:text-indigo-400">{item.role}</p>
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-tight">{item.title}</h3>
+              <p className="text-sm sm:text-base font-semibold text-indigo-600 dark:text-indigo-400">{item.role}</p>
               <div className="flex items-center text-slate-500 dark:text-slate-400 pt-2">
                 <MapPin className="w-4 h-4 mr-2 flex-shrink-0" />
-                <span className="text-sm font-medium">{item.location}</span>
+                <span className="text-xs sm:text-sm font-medium">{item.location}</span>
               </div>
             </div>
           </div>
@@ -161,7 +162,7 @@ const AboutSection = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="relative min-h-screen bg-slate-50 dark:bg-slate-900 font-sans flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-24 overflow-hidden transition-colors duration-300"
+      className="relative min-h-screen bg-slate-50 dark:bg-slate-900 font-sans flex flex-col items-center justify-center px-2 sm:px-4 md:px-6 lg:px-8 py-16 sm:py-20 md:py-24 overflow-hidden transition-colors duration-300"
     >
       {/* Background patterns adjusted for both modes */}
       <div className="absolute inset-0 z-0 h-full w-full bg-slate-50 dark:bg-slate-900 bg-[linear-gradient(to_right,#80808011_1px,transparent_1px),linear-gradient(to_bottom,#80808011_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
@@ -174,15 +175,15 @@ const AboutSection = () => {
           <div className="inline-flex items-center justify-center p-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full mb-6 shadow-lg shadow-indigo-500/20">
             <Sparkles className="w-6 h-6 text-white" />
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:via-slate-300 dark:to-slate-500 bg-clip-text text-transparent mb-4 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:via-slate-300 dark:to-slate-500 bg-clip-text text-transparent mb-4 tracking-tight">
             My Journey in Tech
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
             A timeline of my key experiences in development, leadership, and community contribution.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
           {journeyData.map((item, index) => (
             <JourneyCard
               key={index}
