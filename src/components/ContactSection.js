@@ -126,7 +126,7 @@ const ContactSection = () => {
                   <Terminal className="w-8 h-8" />
                 </div>
                 <div className="text-green-400 font-mono text-sm">
-                  $ contact --init
+                  $ contact
                 </div>
               </div>
               
