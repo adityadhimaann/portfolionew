@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { MapPin, Sparkles } from 'lucide-react';
+import { MapPin, Sparkles, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 
 // --- Data for the journey cards ---
 const journeyData = [
@@ -9,25 +9,29 @@ const journeyData = [
     location: "Gurugram, Haryana",
     image: require('../assets/e.jpeg'),
     link: "https://gromo.com",
-    ariaLabel: "Gromo X AWS Finarva AI 2025 CTO at Gromo"
+    ariaLabel: "Gromo X AWS Finarva AI 2025 CTO at Gromo",
+    year: "2025",
+    category: "leadership"
   },
-  // --- NEW ITEM ADDED HERE ---
   {
     title: "Team Leadership at FinArva AI Hackathon",
     role: "Team Lead | With strong team support",
     location: "Gurugram, Haryana",
-    image: require('../assets/gromo.jpeg'), // Using the new image
+    image: require('../assets/gromo.jpeg'),
     link: "https://gromo.com",
-    ariaLabel: "Team Lead at Gromo"
+    ariaLabel: "Team Lead at Gromo",
+    year: "2025",
+    category: "hackathon"
   },
-  // --- End of new item ---
   {
     title: "SDE Intern",
     role: "@Larsen & Toubro",
     location: "Faridabad, Haryana",
     image: require('../assets/d.jpeg'),
     link: "https://www.larsentoubro.com",
-    ariaLabel: "SDE Intern at Larsen & Toubro"
+    ariaLabel: "SDE Intern at Larsen & Toubro",
+    year: "2025",
+    category: "internship"
   },
   {
     title: "#building in AI",
@@ -35,7 +39,9 @@ const journeyData = [
     location: "Noida, Uttar Pradesh",
     image: require('../assets/f.jpeg'),
     link: "https://sarvam.ai",
-    ariaLabel: "Building something creative in AI at SarvamAI"
+    ariaLabel: "Building something creative in AI at SarvamAI",
+    year: "2024",
+    category: "project"
   },
   {
     title: "Google Cloud Developers Day",
@@ -43,7 +49,9 @@ const journeyData = [
     location: "Noida, Uttar Pradesh",
     image: require('../assets/gdg.jpg'),
     link: "https://gdg.community.dev/noida/",
-    ariaLabel: "Google Cloud Developers Day 2025 at GDG Noida"
+    ariaLabel: "Google Cloud Developers Day 2025 at GDG Noida",
+    year: "2025",
+    category: "event"
   },
   {
     title: "Google Cloud Developers Day",
@@ -51,84 +59,66 @@ const journeyData = [
     location: "Noida, Uttar Pradesh",
     image: require('../assets/gdg2.jpg'),
     link: "https://gdg.community.dev/noida/",
-    ariaLabel: "Google Cloud Developers Day at GDG Noida"
+    ariaLabel: "Google Cloud Developers Day at GDG Noida",
+    year: "2025",
+    category: "event"
   }
 ];
 
 // --- Reusable Journey Card Sub-Component ---
-const JourneyCard = ({ item, isVisible, delay }) => {
-  const cardRef = useRef(null);
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
-  const [glowPosition, setGlowPosition] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const { width, height, left, top } = rect;
-    const mouseX = e.clientX - left;
-    const mouseY = e.clientY - top;
-
-    const xRot = (mouseY / height - 0.5) * -15;
-    const yRot = (mouseX / width - 0.5) * 15;
-
-    setRotation({ x: xRot, y: yRot });
-    setGlowPosition({ x: mouseX, y: mouseY });
-  };
-
-  const handleMouseLeave = () => {
-    setRotation({ x: 0, y: 0 });
-  };
-
+const JourneyCard = ({ item, isVisible, delay, index, hoveredCard, onCardHover, onCardLeave }) => {
   return (
-    <div
-      className={`transition-all duration-700 ease-out ${
+    <div 
+      className={`flex-shrink-0 w-80 sm:w-96 h-auto bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:bg-white/15 mx-4 group ${hoveredCard === index ? 'ring-2 ring-blue-400/50' : ''} ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}
       style={{ transitionDelay: `${delay}ms` }}
+      onMouseEnter={() => onCardHover(index)}
+      onMouseLeave={onCardLeave}
     >
-      <a
-        href={item.link}
-        target="_blank"
+      <div className="flex justify-between items-start mb-4">
+        <div className="flex items-center gap-3">
+          <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
+          <span className="text-sm font-medium text-blue-300 bg-blue-500/20 px-3 py-1 rounded-full">
+            {item.year}
+          </span>
+        </div>
+        <span className="text-xs text-gray-400 bg-gray-700/50 px-2 py-1 rounded">
+          {item.category}
+        </span>
+      </div>
+      
+      <div className="aspect-w-4 aspect-h-3 mb-4 sm:mb-5 overflow-hidden rounded-lg bg-white/5">
+        <img
+          src={item.image}
+          alt={item.title}
+          className="w-full h-48 object-contain group-hover:scale-105 transition-transform duration-300"
+          loading="lazy"
+        />
+      </div>
+      
+      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors duration-300">
+        {item.title}
+      </h3>
+      
+      <p className="text-sm font-semibold text-indigo-400 mb-2">
+        {item.role}
+      </p>
+      
+      <div className="flex items-center text-gray-300 mb-4">
+        <MapPin className="w-4 h-4 mr-2 flex-shrink-0" />
+        <span className="text-sm">{item.location}</span>
+      </div>
+      
+      <a 
+        href={item.link} 
+        target="_blank" 
         rel="noopener noreferrer"
         aria-label={item.ariaLabel}
-        className="block group"
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          transform: `perspective(1000px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale(1)`,
-          transition: 'transform 0.2s ease-out',
-        }}
+        className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors duration-300 text-sm font-medium group"
       >
-        {/* Card outer shell with styles for both modes */}
-        <div className="relative rounded-2xl p-1 bg-slate-200 dark:bg-gradient-to-br dark:from-slate-700/50 dark:via-slate-800/50 dark:to-slate-900/50 h-full shadow-lg dark:shadow-2xl dark:shadow-slate-950/50">
-          <div
-            className="absolute inset-[-1px] rounded-[11px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            style={{
-              background: `radial-gradient(400px circle at ${glowPosition.x}px ${glowPosition.y}px, rgba(99, 102, 241, 0.3), transparent 80%)`,
-            }}
-          ></div>
-          {/* Card inner content area with styles for both modes */}
-          <div className="relative bg-white dark:bg-slate-900 w-full h-full rounded-xl overflow-hidden p-4 sm:p-5 border border-slate-200 dark:border-slate-800">
-            <div className="aspect-w-4 aspect-h-3 mb-4 sm:mb-5 overflow-hidden rounded-lg">
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                loading="lazy"
-                style={{ maxHeight: '220px', width: '100%', objectFit: 'cover' }}
-              />
-            </div>
-            <div className="space-y-2">
-              <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-tight">{item.title}</h3>
-              <p className="text-sm sm:text-base font-semibold text-indigo-600 dark:text-indigo-400">{item.role}</p>
-              <div className="flex items-center text-slate-500 dark:text-slate-400 pt-2">
-                <MapPin className="w-4 h-4 mr-2 flex-shrink-0" />
-                <span className="text-xs sm:text-sm font-medium">{item.location}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <span>View Details</span>
+        <ExternalLink className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
       </a>
     </div>
   );
@@ -137,7 +127,11 @@ const JourneyCard = ({ item, isVisible, delay }) => {
 // --- Main AboutSection Component ---
 const AboutSection = () => {
   const sectionRef = useRef(null);
+  const scrollContainerRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [hoveredCard, setHoveredCard] = useState(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -158,15 +152,115 @@ const AboutSection = () => {
     };
   }, []);
 
+  // Auto-scroll effect for journey cards
+  useEffect(() => {
+    if (!isAutoScrolling || !scrollContainerRef.current || !isVisible) return;
+
+    let animationId;
+    
+    const animate = () => {
+      if (scrollContainerRef.current && isAutoScrolling) {
+        const container = scrollContainerRef.current.parentElement;
+        const maxScroll = scrollContainerRef.current.scrollWidth - container.clientWidth;
+        
+        if (container.scrollLeft >= maxScroll) {
+          // Instant reset to start for continuous infinite loop
+          container.scrollLeft = 0;
+          setScrollPosition(0);
+        } else {
+          // Continuous smooth auto-scroll
+          container.scrollLeft += 5; // Slow continuous movement
+          setScrollPosition(container.scrollLeft);
+        }
+      }
+      
+      if (isAutoScrolling) {
+        animationId = requestAnimationFrame(animate);
+      }
+    };
+
+    // Start animation immediately with no delay
+    if (isAutoScrolling) {
+      animationId = requestAnimationFrame(animate);
+    }
+
+    return () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    };
+  }, [isAutoScrolling, isVisible]);
+
+  const handleMouseEnter = () => {
+    setIsAutoScrolling(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsAutoScrolling(true);
+  };
+
+  const handleCardHover = (index) => {
+    setHoveredCard(index);
+  };
+
+  const handleCardLeave = () => {
+    setHoveredCard(null);
+  };
+
+  const scrollLeft = () => {
+    const container = scrollContainerRef.current?.parentElement;
+    if (container) {
+      const scrollAmount = 384; // Match card width + margins
+      const targetPosition = Math.max(0, container.scrollLeft - scrollAmount);
+      
+      // Smooth scroll animation
+      container.scrollTo({
+        left: targetPosition,
+        behavior: 'smooth'
+      });
+      
+      setScrollPosition(targetPosition);
+      setIsAutoScrolling(false);
+      setTimeout(() => setIsAutoScrolling(true), 3000); // Resume auto-scroll after 3 seconds
+    }
+  };
+
+  const scrollRight = () => {
+    const container = scrollContainerRef.current?.parentElement;
+    if (container && scrollContainerRef.current) {
+      const scrollAmount = 384; // Match card width + margins
+      const maxScroll = scrollContainerRef.current.scrollWidth - container.clientWidth;
+      const targetPosition = Math.min(maxScroll, container.scrollLeft + scrollAmount);
+      
+      // Smooth scroll animation
+      container.scrollTo({
+        left: targetPosition,
+        behavior: 'smooth'
+      });
+      
+      setScrollPosition(targetPosition);
+      setIsAutoScrolling(false);
+      setTimeout(() => setIsAutoScrolling(true), 3000); // Resume auto-scroll after 3 seconds
+    }
+  };
+
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="relative min-h-screen bg-slate-50 dark:bg-slate-900 font-sans flex flex-col items-center justify-center px-2 sm:px-4 md:px-6 lg:px-8 py-16 sm:py-20 md:py-24 overflow-hidden transition-colors duration-300"
-    >
-      {/* Background patterns adjusted for both modes */}
-      <div className="absolute inset-0 z-0 h-full w-full bg-slate-50 dark:bg-slate-900 bg-[linear-gradient(to_right,#80808011_1px,transparent_1px),linear-gradient(to_bottom,#80808011_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
-      <div className="absolute -top-1/4 left-0 z-0 h-full w-full bg-[radial-gradient(circle_500px_at_50%_200px,#d1d5db,transparent)] dark:bg-[radial-gradient(circle_500px_at_50%_200px,#1e40af22,transparent)]"></div>
+    <>
+      <style>
+        {`
+          .carousel-container::-webkit-scrollbar {
+            display: none;
+          }
+        `}
+      </style>
+      <section
+        id="about"
+        ref={sectionRef}
+        className="relative min-h-screen bg-slate-900 font-sans flex flex-col items-center justify-center px-2 sm:px-4 md:px-6 lg:px-8 py-16 sm:py-20 md:py-24 overflow-hidden transition-colors duration-300"
+      >
+      {/* Background patterns adjusted for dark mode */}
+      <div className="absolute inset-0 z-0 h-full w-full bg-slate-900 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+      <div className="absolute -top-1/4 left-0 z-0 h-full w-full bg-[radial-gradient(circle_500px_at_50%_200px,#1e40af22,transparent)]"></div>
       
       <div className="w-full max-w-7xl mx-auto z-10">
         <div className={`text-center mb-16 transition-all duration-1000 ${
@@ -175,26 +269,80 @@ const AboutSection = () => {
           <div className="inline-flex items-center justify-center p-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full mb-6 shadow-lg shadow-indigo-500/20">
             <Sparkles className="w-6 h-6 text-white" />
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-br from-slate-900 to-slate-600 dark:from-white dark:via-slate-300 dark:to-slate-500 bg-clip-text text-transparent mb-4 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-br from-white via-slate-300 to-slate-500 bg-clip-text text-transparent mb-4 tracking-tight">
             My Journey in Tech
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
             A timeline of my key experiences in development, leadership, and community contribution.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
-          {journeyData.map((item, index) => (
-            <JourneyCard
-              key={index}
-              item={item}
-              isVisible={isVisible}
-              delay={index * 150}
-            />
-          ))}
+        {/* Auto-scrolling Journey Carousel */}
+        <div className="relative">
+          {/* Gradient overlays for fade effect */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none"></div>
+          
+          {/* Scroll buttons */}
+          <button
+            onClick={scrollLeft}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full p-3 text-white hover:bg-white/20 active:bg-white/30 active:scale-95 transition-all duration-300 shadow-lg hover:scale-110 group"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+          </button>
+          
+          <button
+            onClick={scrollRight}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full p-3 text-white hover:bg-white/20 active:bg-white/30 active:scale-95 transition-all duration-300 shadow-lg hover:scale-110 group"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+          </button>
+          
+          {/* Journey cards carousel container */}
+          <div 
+            className="overflow-x-auto overflow-y-visible py-8 carousel-container"
+            style={{
+              scrollbarWidth: 'none', /* Firefox */
+              msOverflowStyle: 'none', /* IE and Edge */
+            }}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onScroll={(e) => {
+              // Update scroll position when user manually scrolls
+              setScrollPosition(e.target.scrollLeft);
+              // Temporarily pause auto-scroll when user is manually scrolling
+              setIsAutoScrolling(false);
+              setTimeout(() => setIsAutoScrolling(true), 2000); // Resume after 2 seconds
+            }}
+          >
+            <div 
+              ref={scrollContainerRef}
+              className="flex gap-0"
+              style={{ 
+                width: `${journeyData.length * 384}px`, // 384px = 320px card + 64px margin (w-80 + mx-4)
+                willChange: 'transform'
+              }}
+            >
+              {journeyData.map((item, index) => (
+                <JourneyCard
+                  key={index}
+                  item={item}
+                  isVisible={isVisible}
+                  delay={index * 150}
+                  index={index}
+                  hoveredCard={hoveredCard}
+                  onCardHover={handleCardHover}
+                  onCardLeave={handleCardLeave}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
+    </>
   );
 };
 
