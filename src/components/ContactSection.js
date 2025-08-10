@@ -65,67 +65,68 @@ const ContactSection = () => {
     <section 
       id="contact" 
       ref={sectionRef} 
-      className="relative min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 font-mono flex items-center py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 font-mono flex items-center py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
       {/* Animated Background Grid */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#10b98120_1px,transparent_1px),linear-gradient(to_bottom,#10b98120_1px,transparent_1px)] bg-[size:20px_20px] animate-pulse"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#10b98120_1px,transparent_1px),linear-gradient(to_bottom,#10b98120_1px,transparent_1px)] bg-[size:15px_15px] sm:bg-[size:20px_20px] animate-pulse"></div>
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-cyan-500/5 to-transparent"></div>
         
-        {/* Floating Code Symbols */}
-        <div className="absolute top-20 left-10 text-cyan-400/20 text-6xl font-mono animate-bounce">{'<'}</div>
-        <div className="absolute top-40 right-20 text-green-400/20 text-4xl font-mono animate-pulse delay-1000">{'>'}</div>
-        <div className="absolute bottom-32 left-20 text-blue-400/20 text-5xl font-mono animate-bounce delay-500">{'{ }'}</div>
-        <div className="absolute bottom-20 right-10 text-purple-400/20 text-3xl font-mono animate-pulse delay-1500">{'[ ]'}</div>
+        {/* Floating Code Symbols - Responsive */}
+        <div className="absolute top-12 sm:top-20 left-4 sm:left-10 text-cyan-400/20 text-3xl sm:text-6xl font-mono animate-bounce">{'<'}</div>
+        <div className="absolute top-20 sm:top-40 right-8 sm:right-20 text-green-400/20 text-2xl sm:text-4xl font-mono animate-pulse delay-1000">{'>'}</div>
+        <div className="absolute bottom-20 sm:bottom-32 left-8 sm:left-20 text-blue-400/20 text-3xl sm:text-5xl font-mono animate-bounce delay-500">{'{ }'}</div>
+        <div className="absolute bottom-12 sm:bottom-20 right-4 sm:right-10 text-purple-400/20 text-xl sm:text-3xl font-mono animate-pulse delay-1500">{'[ ]'}</div>
       </div>
       
       <div className="max-w-6xl mx-auto w-full z-10">
-        <div className="grid lg:grid-cols-2 gap-12 xl:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center">
           
           {/* Left Column: Enhanced Image with Developer Theme */}
-          <div className={`transition-all duration-1000 ease-out ${
+          <div className={`order-2 lg:order-1 transition-all duration-1000 ease-out ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
           }`}>
-            <div className="relative">
+            <div className="relative max-w-md mx-auto lg:max-w-none">
               {/* Terminal Window Frame */}
-              <div className="bg-slate-800 rounded-t-lg p-3 border-b border-slate-700">
+              <div className="bg-slate-800 rounded-t-lg p-2 sm:p-3 border-b border-slate-700">
                 <div className="flex items-center space-x-2">
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
                   <div className="flex-1 text-center">
-                    <span className="text-slate-400 text-sm font-mono">developer.profile</span>
+                    <span className="text-slate-400 text-xs sm:text-sm font-mono">developer.profile</span>
                   </div>
                 </div>
               </div>
               
               {/* Image Container */}
-              <div className="relative bg-slate-800 rounded-b-lg p-4 border-2 border-slate-700 hover:border-cyan-400 transition-all duration-300">
+              <div className="relative bg-slate-800 rounded-b-lg p-3 sm:p-4 border-2 border-slate-700 hover:border-cyan-400 transition-all duration-300">
                 <img
                   src={aImg}
                   alt="Aditya Dhiman"
                   className="w-full h-auto object-cover rounded-lg shadow-2xl border border-slate-600"
-                  style={{ maxHeight: '500px' }}
+                  style={{ maxHeight: '400px' }}
                 />
                 
-                {/* Code Overlay */}
-                <div className="absolute top-6 right-6 bg-black/80 backdrop-blur-sm p-3 rounded-lg border border-cyan-400/50">
+                {/* Code Overlay - Mobile Optimized */}
+                <div className="absolute top-4 sm:top-6 right-4 sm:right-6 bg-black/80 backdrop-blur-sm p-2 sm:p-3 rounded-lg border border-cyan-400/50">
                   <div className="text-cyan-400 text-xs font-mono">
                     <div className="flex items-center space-x-1">
-                      <Terminal className="w-3 h-3" />
-                      <span>./contact --status</span>
+                      <Terminal className="w-2 h-2 sm:w-3 sm:h-3" />
+                      <span className="hidden sm:inline">./contact --status</span>
+                      <span className="sm:hidden">online</span>
                     </div>
-                    <div className="text-green-400 mt-1">✓ online</div>
+                    <div className="text-green-400 mt-1 hidden sm:block">✓ online</div>
                   </div>
                 </div>
                 
                 {/* Animated Status Indicator */}
-                <div className="absolute -bottom-2 -right-2 bg-slate-800 p-3 rounded-full shadow-lg border border-slate-600 group hover:border-cyan-400 transition-all duration-300">
+                <div className="absolute -bottom-2 -right-2 bg-slate-800 p-2 sm:p-3 rounded-full shadow-lg border border-slate-600 group hover:border-cyan-400 transition-all duration-300">
                   <div className="relative text-cyan-400 group-hover:text-cyan-300 transition-colors">
-                    <Code className="w-6 h-6"/>
-                    <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                    <Code className="w-4 h-4 sm:w-6 sm:h-6"/>
+                    <span className="absolute -top-1 -right-1 flex h-2 w-2 sm:h-3 sm:w-3">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 sm:h-3 sm:w-3 bg-cyan-500"></span>
                     </span>
                   </div>
                 </div>
@@ -134,36 +135,36 @@ const ContactSection = () => {
           </div>
 
           {/* Right Column: Enhanced Form */}
-          <div className={`space-y-8 transition-all duration-1000 ease-out delay-200 ${
+          <div className={`order-1 lg:order-2 space-y-6 sm:space-y-8 transition-all duration-1000 ease-out delay-200 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
           }`}>
             
             {/* Header with Developer Accent */}
-            <div className="space-y-4">
-              <div className="flex items-center space-x-3">
+            <div className="space-y-3 sm:space-y-4 text-center lg:text-left">
+              <div className="flex items-center justify-center lg:justify-start space-x-3">
                 <div className="text-cyan-400">
-                  <Terminal className="w-8 h-8" />
+                  <Terminal className="w-6 h-6 sm:w-8 sm:h-8" />
                 </div>
-                <div className="text-green-400 font-mono text-sm">
+                <div className="text-green-400 font-mono text-xs sm:text-sm">
                   $ contact
                 </div>
               </div>
               
-              <h2 className="text-4xl sm:text-5xl font-bold text-white font-mono">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white font-mono leading-tight">
                 <span className="text-cyan-400">{'<'}</span>
                 Let's Connect
                 <span className="text-cyan-400">{' />'}</span>
               </h2>
               
-              <p className="text-lg text-slate-300 font-mono">
+              <p className="text-base sm:text-lg text-slate-300 font-mono">
                 <span className="text-green-400">// </span>
                 Ready to build something amazing together? Drop me a line.
               </p>
             </div>
 
             {/* Enhanced Form */}
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="space-y-5 sm:space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                 <div className="relative">
                   <input 
                     type="text" 
@@ -172,7 +173,7 @@ const ContactSection = () => {
                     value={formData.name} 
                     onChange={handleChange} 
                     required 
-                    className="w-full p-4 bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-600 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-white placeholder-slate-400 font-mono"
+                    className="w-full p-3 sm:p-4 bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-600 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-white placeholder-slate-400 font-mono text-sm sm:text-base"
                   />
                   <div className="absolute top-0 left-3 -translate-y-1/2 bg-slate-900 px-2 text-xs text-cyan-400 font-mono">
                     name
@@ -187,7 +188,7 @@ const ContactSection = () => {
                     value={formData.email} 
                     onChange={handleChange} 
                     required 
-                    className="w-full p-4 bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-600 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-white placeholder-slate-400 font-mono"
+                    className="w-full p-3 sm:p-4 bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-600 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-white placeholder-slate-400 font-mono text-sm sm:text-base"
                   />
                   <div className="absolute top-0 left-3 -translate-y-1/2 bg-slate-900 px-2 text-xs text-cyan-400 font-mono">
                     email
@@ -199,11 +200,11 @@ const ContactSection = () => {
                 <textarea 
                   name="message" 
                   placeholder="Your message here..." 
-                  rows="5" 
+                  rows="4" 
                   value={formData.message} 
                   onChange={handleChange} 
                   required 
-                  className="w-full p-4 bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-600 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-white placeholder-slate-400 font-mono resize-none"
+                  className="w-full p-3 sm:p-4 bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-600 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-white placeholder-slate-400 font-mono resize-none text-sm sm:text-base"
                 ></textarea>
                 <div className="absolute top-0 left-3 -translate-y-1/2 bg-slate-900 px-2 text-xs text-cyan-400 font-mono">
                   message
@@ -220,59 +221,59 @@ const ContactSection = () => {
                 type="submit" 
                 onClick={handleSubmit}
                 disabled={sending}
-                className={`group w-full relative overflow-hidden bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-mono font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 border border-cyan-400/50 ${sending ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`group w-full relative overflow-hidden bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-mono font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 border border-cyan-400/50 text-sm sm:text-base ${sending ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <span className="relative flex items-center justify-center">
-                  <Terminal className="w-5 h-5 mr-3" />
+                  <Terminal className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3" />
                   {sending ? 'Sending...' : 'Execute Send()'}
-                  <Send className="w-5 h-5 ml-3 transition-transform duration-300 group-hover:translate-x-1" />
+                  <Send className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
               </button>
               {sendStatus && (
-                <div className={`mt-2 text-sm font-mono ${sendStatus.includes('') ? 'text-green-400' : 'text-red-400'}`}>{sendStatus}</div>
+                <div className={`mt-2 text-xs sm:text-sm font-mono text-center ${sendStatus.includes('🚀') ? 'text-green-400' : 'text-red-400'}`}>{sendStatus}</div>
               )}
             </div>
             
             {/* Enhanced Social Links & Info */}
-            <div className="pt-6 border-t border-slate-700">
-              <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
-                <div className="flex items-center space-x-3 text-slate-400 font-mono">
-                  <MapPin className="w-5 h-5 flex-shrink-0 text-cyan-400" />
-                  <span className="text-sm">Lucknow, Uttar Pradesh, India</span>
+            <div className="pt-4 sm:pt-6 border-t border-slate-700">
+              <div className="flex flex-col gap-4 sm:gap-6">
+                <div className="flex items-center justify-center lg:justify-start space-x-2 sm:space-x-3 text-slate-400 font-mono">
+                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-cyan-400" />
+                  <span className="text-xs sm:text-sm">Lucknow, Uttar Pradesh, India</span>
                 </div>
                 
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center justify-center lg:justify-start space-x-3 sm:space-x-4">
                   <a 
                     href="https://github.com/adityadhimaann" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="p-2 bg-slate-800 rounded-lg border border-slate-600 text-slate-400 hover:text-white hover:border-cyan-400 transition-all duration-300 hover:bg-slate-700"
+                    className="p-2 sm:p-2.5 bg-slate-800 rounded-lg border border-slate-600 text-slate-400 hover:text-white hover:border-cyan-400 transition-all duration-300 hover:bg-slate-700"
                   >
-                    <Github className="w-5 h-5" />
+                    <Github className="w-4 h-4 sm:w-5 sm:h-5" />
                   </a>
                   <a 
                     href="https://linkedin.com" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="p-2 bg-slate-800 rounded-lg border border-slate-600 text-slate-400 hover:text-white hover:border-cyan-400 transition-all duration-300 hover:bg-slate-700"
+                    className="p-2 sm:p-2.5 bg-slate-800 rounded-lg border border-slate-600 text-slate-400 hover:text-white hover:border-cyan-400 transition-all duration-300 hover:bg-slate-700"
                   >
-                    <Linkedin className="w-5 h-5" />
+                    <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
                   </a>
                   <a 
                     href="https://instagram.com/adityadhimaann" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="p-2 bg-slate-800 rounded-lg border border-slate-600 text-slate-400 hover:text-white hover:border-cyan-400 transition-all duration-300 hover:bg-slate-700"
+                    className="p-2 sm:p-2.5 bg-slate-800 rounded-lg border border-slate-600 text-slate-400 hover:text-white hover:border-cyan-400 transition-all duration-300 hover:bg-slate-700"
                   >
-                    <Instagram className="w-5 h-5" />
+                    <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
                   </a>
                 </div>
               </div>
               
               {/* Status Bar */}
-              <div className="mt-6 flex items-center justify-between text-xs font-mono text-slate-500">
-                <div className="flex items-center space-x-4">
+              <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-slate-500">
+                <div className="flex items-center space-x-3 sm:space-x-4">
                   <div className="flex items-center space-x-1">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                     <span>Available for projects</span>

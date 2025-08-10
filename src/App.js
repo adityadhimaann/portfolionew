@@ -7,6 +7,7 @@ import ExperienceSection from './components/ExperienceSection';
 import QualificationsSection from './components/QualificationsSection';
 import ContactSection from './components/ContactSection';
 import FloatingActionButton from './components/FloatingActionButton';
+import './styles/mobile-enhancements.css';
 
 const PortfolioWebsite = () => {
   const [isVisible, setIsVisible] = useState({});
