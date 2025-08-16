@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, ArrowRight, Code, Terminal, Zap, Github, ExternalLink } from 'lucide-react';
-import heroImg from '../assets/b.jpg'; // Make sure the path is correct
+import heroImg from '../assets/b.png'; // Make sure the path is correct
 
 const HeroSection = ({ scrollToSection }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
