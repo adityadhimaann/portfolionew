@@ -66,39 +66,30 @@ const ExperienceSection = ({ isVisible }) => {
   ];
 
   return (
-    <section id="experience" className="relative min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"></div>
-      </div>
-
-      {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-
+    <section id="experience" className="relative min-h-screen">
+      
       <div className="relative z-10 container mx-auto px-6 py-20">
         {/* Header Section */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full border border-blue-500/30 mb-6">
+        <div className="text-center mb-20 animate-on-scroll">
+          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full border border-blue-500/30 mb-6 animate-on-scroll">
             <Terminal className="w-4 h-4 mr-2 text-blue-400" />
             <span className="text-sm font-mono text-blue-300">Developer Portfolio</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent animate-on-scroll">
             Crafting Digital
             <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               Excellence
             </span>
           </h1>
           
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed animate-on-scroll">
             Building next-generation web applications with cutting-edge technologies, 
             exceptional performance, and pixel-perfect design.
           </p>
 
           {/* Typing Animation */}
-          <div className="bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-xl p-6 max-w-2xl mx-auto mb-12">
+          <div className="bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-xl p-6 max-w-2xl mx-auto mb-12 animate-on-scroll">
             <div className="flex items-center justify-between mb-3">
               <div className="flex space-x-2">
                 <div className="w-3 h-3 bg-red-500 rounded-full"></div>
@@ -113,11 +104,11 @@ const ExperienceSection = ({ isVisible }) => {
           </div>
 
           {/* Tech Stack */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="flex flex-wrap justify-center gap-3 mb-12 animate-on-scroll">
             {techStack.map((tech, index) => (
               <div
                 key={tech.name}
-                className={`px-4 py-2 bg-gradient-to-r ${tech.color} rounded-full text-white font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 animate-fade-in`}
+                className={`px-4 py-2 bg-gradient-to-r ${tech.color} rounded-full text-white font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 animate-fade-in animate-on-scroll`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <span className="mr-2">{tech.icon}</span>
@@ -128,11 +119,11 @@ const ExperienceSection = ({ isVisible }) => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 animate-on-scroll">
           {projects.map((project, index) => (
             <div
               key={index}
-              className={`group relative bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 hover:border-gray-600 transition-all duration-500 hover:transform hover:-translate-y-2 ${
+              className={`group relative bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 hover:border-gray-600 transition-all duration-500 hover:transform hover:-translate-y-2 animate-on-scroll ${
                 activeCard === index ? 'ring-2 ring-blue-500/50' : ''
               }`}
               onMouseEnter={() => setActiveCard(index)}

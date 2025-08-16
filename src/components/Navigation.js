@@ -38,7 +38,7 @@ const Navigation = ({ activeSection, scrollToSection }) => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex justify-between items-center">
             {/* Logo */}
-            <div className="text-xl sm:text-2xl font-bold text-white font-mono">
+            <div className="text-lg sm:text-xl font-bold text-white font-sans">
               <span className="text-cyan-400">$</span> aditya.dev
             </div>
             

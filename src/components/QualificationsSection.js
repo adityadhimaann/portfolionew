@@ -155,48 +155,37 @@ const QualificationsSection = () => {
     <section
       id="qualifications"
       ref={sectionRef}
-      className="relative min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 font-mono flex items-center py-12 sm:py-20 md:py-24 px-2 sm:px-4 md:px-6 lg:px-8 overflow-hidden"
+      className="relative min-h-screen font-sans flex items-center py-12 sm:py-20 md:py-24 px-2 sm:px-4 md:px-6 lg:px-8"
     >
-      {/* Enhanced Background Pattern */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#06b6d420_1px,transparent_1px),linear-gradient(to_bottom,#06b6d420_1px,transparent_1px)] bg-[size:20px_20px] animate-pulse"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-cyan-500/5 to-transparent"></div>
-        
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-2 sm:left-10 text-cyan-400/20 text-3xl sm:text-6xl animate-float hidden sm:block">{'<skills>'}</div>
-        <div className="absolute bottom-20 right-2 sm:right-10 text-blue-400/20 text-3xl sm:text-6xl animate-float-delayed hidden sm:block">{'</skills>'}</div>
-        <div className="absolute top-1/2 left-1 sm:left-5 text-green-400/20 text-2xl sm:text-4xl animate-bounce-slow hidden sm:block">{'{ }'}</div>
-        <div className="absolute top-1/3 right-1 sm:right-5 text-purple-400/20 text-3xl sm:text-5xl animate-pulse-slow hidden sm:block">{'[ ]'}</div>
-      </div>
       
       <div className="max-w-6xl w-full mx-auto z-10 px-2 sm:px-0">
         
         {/* Terminal Header */}
-        <div className={`mb-16 transition-all duration-1000 ease-out ${
+        <div className={`mb-16 transition-all duration-1000 ease-out animate-on-scroll ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-t-lg p-3 border-b border-slate-700/50">
+          <div className="bg-slate-800/50 backdrop-blur-sm rounded-t-lg p-3 border-b border-slate-700/50 animate-on-scroll">
             <div className="flex items-center space-x-2">
               <div className="w-3 h-3 bg-red-500 rounded-full"></div>
               <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
               <div className="flex-1 text-center">
-                <span className="text-slate-400 text-sm">~/portfolio/qualifications</span>
+                <span className="text-slate-400 text-sm font-sans">~/portfolio/qualifications</span>
               </div>
             </div>
           </div>
           
-          <div className="bg-slate-800/30 backdrop-blur-sm rounded-b-lg p-8 border border-slate-700/50">
+          <div className="bg-slate-800/30 backdrop-blur-sm rounded-b-lg p-8 border border-slate-700/50 animate-on-scroll">
             <div className="text-center space-y-4">
-              <div className="text-cyan-400 text-sm">
+              <div className="text-cyan-400 text-sm animate-on-scroll">
                 <span className="text-green-400">$</span> cat qualifications.md
               </div>
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white">
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white animate-on-scroll">
                 <span className="text-cyan-400">{'<'}</span>
                 My Qualifications
                 <span className="text-cyan-400">{' />'}</span>
               </h2>
-              <p className="text-base sm:text-lg text-slate-300">
+              <p className="text-base sm:text-lg text-slate-300 animate-on-scroll">
                 <span className="text-green-400">// </span>
                 Academic background and technical expertise
               </p>
@@ -204,10 +193,10 @@ const QualificationsSection = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-8 md:gap-12 xl:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-8 md:gap-12 xl:gap-16 animate-on-scroll">
           
           {/* Left Column: Education & Achievements */}
-          <div className={`col-span-1 md:col-span-2 lg:col-span-2 space-y-8 transition-all duration-1000 ease-out ${
+          <div className={`col-span-1 md:col-span-2 lg:col-span-2 space-y-8 transition-all duration-1000 ease-out animate-on-scroll ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
           }`}>
             
@@ -318,7 +307,7 @@ const QualificationsSection = () => {
                   <button
                     key={category.id}
                     onClick={() => setActiveSkillCategory(category.id)}
-                    className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-mono text-xs sm:text-sm transition-all duration-300 whitespace-nowrap ${
+                    className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-sans text-xs sm:text-sm transition-all duration-300 whitespace-nowrap ${
                       activeSkillCategory === category.id
                         ? 'bg-cyan-500 text-slate-900 shadow-lg shadow-cyan-500/25'
                         : 'bg-slate-800/50 text-slate-300 border border-slate-700 hover:border-cyan-400 hover:text-cyan-400'
@@ -388,7 +377,7 @@ const QualificationsSection = () => {
                         
                         {/* Enhanced Category Tag */}
                         <div className="flex justify-between items-center mt-3">
-                          <span className="text-xs text-slate-500 font-mono bg-slate-900/30 px-2 py-1 rounded">
+                          <span className="text-xs text-slate-500 font-sans bg-slate-900/30 px-2 py-1 rounded">
                             .{skill.category}
                           </span>
                           {hoveredSkill === index && (
@@ -417,7 +406,7 @@ const QualificationsSection = () => {
               
               {/* Skills count indicator */}
               <div className="text-center">
-                <span className="text-xs text-slate-500 font-mono bg-slate-800/30 px-3 py-1 rounded-full">
+                <span className="text-xs text-slate-500 font-sans bg-slate-800/30 px-3 py-1 rounded-full">
                   {filteredSkills.length} skills loaded • Auto-scrolling {isAutoScrolling ? 'enabled' : 'paused'}
                 </span>
               </div>

@@ -256,29 +256,26 @@ const AboutSection = () => {
       <section
         id="about"
         ref={sectionRef}
-        className="relative min-h-screen bg-slate-900 font-sans flex flex-col items-center justify-center px-2 sm:px-4 md:px-6 lg:px-8 py-16 sm:py-20 md:py-24 overflow-hidden transition-colors duration-300"
+        className="relative min-h-screen font-sans flex flex-col items-center justify-center px-2 sm:px-4 md:px-6 lg:px-8 py-16 sm:py-20 md:py-24 transition-colors duration-300"
       >
-      {/* Background patterns adjusted for dark mode */}
-      <div className="absolute inset-0 z-0 h-full w-full bg-slate-900 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
-      <div className="absolute -top-1/4 left-0 z-0 h-full w-full bg-[radial-gradient(circle_500px_at_50%_200px,#1e40af22,transparent)]"></div>
       
       <div className="w-full max-w-7xl mx-auto z-10">
-        <div className={`text-center mb-16 transition-all duration-1000 ${
+        <div className={`text-center mb-16 transition-all duration-1000 animate-on-scroll ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
-          <div className="inline-flex items-center justify-center p-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full mb-6 shadow-lg shadow-indigo-500/20">
+          <div className="inline-flex items-center justify-center p-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full mb-6 shadow-lg shadow-indigo-500/20 animate-on-scroll">
             <Sparkles className="w-6 h-6 text-white" />
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-br from-white via-slate-300 to-slate-500 bg-clip-text text-transparent mb-4 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-br from-white via-slate-300 to-slate-500 bg-clip-text text-transparent mb-4 tracking-tight animate-on-scroll">
             My Journey in Tech
           </h2>
-          <p className="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed animate-on-scroll">
             A timeline of my key experiences in development, leadership, and community contribution.
           </p>
         </div>
 
         {/* Auto-scrolling Journey Carousel */}
-        <div className="relative">
+        <div className="relative animate-on-scroll">
           {/* Gradient overlays for fade effect */}
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none"></div>
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none"></div>

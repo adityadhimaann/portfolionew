@@ -65,28 +65,17 @@ const ContactSection = () => {
     <section 
       id="contact" 
       ref={sectionRef} 
-      className="relative min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 font-mono flex items-center py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative min-h-screen font-sans flex items-center py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8"
     >
-      {/* Animated Background Grid */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#10b98120_1px,transparent_1px),linear-gradient(to_bottom,#10b98120_1px,transparent_1px)] bg-[size:15px_15px] sm:bg-[size:20px_20px] animate-pulse"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-cyan-500/5 to-transparent"></div>
-        
-        {/* Floating Code Symbols - Responsive */}
-        <div className="absolute top-12 sm:top-20 left-4 sm:left-10 text-cyan-400/20 text-3xl sm:text-6xl font-mono animate-bounce">{'<'}</div>
-        <div className="absolute top-20 sm:top-40 right-8 sm:right-20 text-green-400/20 text-2xl sm:text-4xl font-mono animate-pulse delay-1000">{'>'}</div>
-        <div className="absolute bottom-20 sm:bottom-32 left-8 sm:left-20 text-blue-400/20 text-3xl sm:text-5xl font-mono animate-bounce delay-500">{'{ }'}</div>
-        <div className="absolute bottom-12 sm:bottom-20 right-4 sm:right-10 text-purple-400/20 text-xl sm:text-3xl font-mono animate-pulse delay-1500">{'[ ]'}</div>
-      </div>
       
-      <div className="max-w-6xl mx-auto w-full z-10">
+      <div className="max-w-6xl mx-auto w-full z-10 animate-on-scroll">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center">
           
           {/* Left Column: Enhanced Image with Developer Theme */}
-          <div className={`order-2 lg:order-1 transition-all duration-1000 ease-out ${
+          <div className={`order-2 lg:order-1 transition-all duration-1000 ease-out animate-on-scroll ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
           }`}>
-            <div className="relative max-w-md mx-auto lg:max-w-none">
+            <div className="relative max-w-md mx-auto lg:max-w-none animate-on-scroll">
               {/* Terminal Window Frame */}
               <div className="bg-slate-800 rounded-t-lg p-2 sm:p-3 border-b border-slate-700">
                 <div className="flex items-center space-x-2">
@@ -150,13 +139,13 @@ const ContactSection = () => {
                 </div>
               </div>
               
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white font-mono leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white font-sans leading-tight">
                 <span className="text-cyan-400">{'<'}</span>
                 Let's Connect
                 <span className="text-cyan-400">{' />'}</span>
               </h2>
               
-              <p className="text-base sm:text-lg text-slate-300 font-mono">
+              <p className="text-base sm:text-lg text-slate-300 font-sans">
                 <span className="text-green-400">// </span>
                 Ready to build something amazing together? Drop me a line.
               </p>
@@ -173,7 +162,7 @@ const ContactSection = () => {
                     value={formData.name} 
                     onChange={handleChange} 
                     required 
-                    className="w-full p-3 sm:p-4 bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-600 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-white placeholder-slate-400 font-mono text-sm sm:text-base"
+                    className="w-full p-3 sm:p-4 bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-600 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-white placeholder-slate-400 font-sans text-sm sm:text-base"
                   />
                   <div className="absolute top-0 left-3 -translate-y-1/2 bg-slate-900 px-2 text-xs text-cyan-400 font-mono">
                     name
@@ -188,7 +177,7 @@ const ContactSection = () => {
                     value={formData.email} 
                     onChange={handleChange} 
                     required 
-                    className="w-full p-3 sm:p-4 bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-600 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-white placeholder-slate-400 font-mono text-sm sm:text-base"
+                    className="w-full p-3 sm:p-4 bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-600 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-white placeholder-slate-400 font-sans text-sm sm:text-base"
                   />
                   <div className="absolute top-0 left-3 -translate-y-1/2 bg-slate-900 px-2 text-xs text-cyan-400 font-mono">
                     email
@@ -204,7 +193,7 @@ const ContactSection = () => {
                   value={formData.message} 
                   onChange={handleChange} 
                   required 
-                  className="w-full p-3 sm:p-4 bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-600 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-white placeholder-slate-400 font-mono resize-none text-sm sm:text-base"
+                  className="w-full p-3 sm:p-4 bg-slate-800/50 backdrop-blur-sm rounded-lg border border-slate-600 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-white placeholder-slate-400 font-sans resize-none text-sm sm:text-base"
                 ></textarea>
                 <div className="absolute top-0 left-3 -translate-y-1/2 bg-slate-900 px-2 text-xs text-cyan-400 font-mono">
                   message
@@ -221,7 +210,7 @@ const ContactSection = () => {
                 type="submit" 
                 onClick={handleSubmit}
                 disabled={sending}
-                className={`group w-full relative overflow-hidden bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-mono font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 border border-cyan-400/50 text-sm sm:text-base ${sending ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`group w-full relative overflow-hidden bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-sans font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 border border-cyan-400/50 text-sm sm:text-base ${sending ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <span className="relative flex items-center justify-center">
@@ -231,14 +220,14 @@ const ContactSection = () => {
                 </span>
               </button>
               {sendStatus && (
-                <div className={`mt-2 text-xs sm:text-sm font-mono text-center ${sendStatus.includes('🚀') ? 'text-green-400' : 'text-red-400'}`}>{sendStatus}</div>
+                <div className={`mt-2 text-xs sm:text-sm font-sans text-center ${sendStatus.includes('🚀') ? 'text-green-400' : 'text-red-400'}`}>{sendStatus}</div>
               )}
             </div>
             
             {/* Enhanced Social Links & Info */}
             <div className="pt-4 sm:pt-6 border-t border-slate-700">
               <div className="flex flex-col gap-4 sm:gap-6">
-                <div className="flex items-center justify-center lg:justify-start space-x-2 sm:space-x-3 text-slate-400 font-mono">
+                <div className="flex items-center justify-center lg:justify-start space-x-2 sm:space-x-3 text-slate-400 font-sans">
                   <MapPin className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-cyan-400" />
                   <span className="text-xs sm:text-sm">Lucknow, Uttar Pradesh, India</span>
                 </div>
@@ -272,7 +261,7 @@ const ContactSection = () => {
               </div>
               
               {/* Status Bar */}
-              <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-slate-500">
+              <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-sans text-slate-500">
                 <div className="flex items-center space-x-3 sm:space-x-4">
                   <div className="flex items-center space-x-1">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
