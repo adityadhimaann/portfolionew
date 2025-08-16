@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fb056515.css",
+    "main.js": "/static/js/main.ab393129.js",
+    "static/js/453.96453769.chunk.js": "/static/js/453.96453769.chunk.js",
+    "static/media/gdg2.jpg": "/static/media/gdg2.a102cb0ef794e0ca19f6.jpg",
+    "static/media/a.jpg": "/static/media/a.0a059ada1c93b49f592b.jpg",
+    "static/media/d.jpeg": "/static/media/d.58917322ee75afea6b18.jpeg",
+    "static/media/gdg.jpg": "/static/media/gdg.eb42c6569fe139a15530.jpg",
+    "static/media/b.png": "/static/media/b.a0aaf9f7673af338d857.png",
+    "static/media/f.jpeg": "/static/media/f.94c6784c77087f82d9f5.jpeg",
+    "static/media/gromo.jpeg": "/static/media/gromo.3936eb7820b1a29b64ae.jpeg",
+    "static/media/e.jpeg": "/static/media/e.9fd29b2abfd776ac1a71.jpeg",
+    "index.html": "/index.html",
+    "main.fb056515.css.map": "/static/css/main.fb056515.css.map",
+    "main.ab393129.js.map": "/static/js/main.ab393129.js.map",
+    "453.96453769.chunk.js.map": "/static/js/453.96453769.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fb056515.css",
+    "static/js/main.ab393129.js"
+  ]
+}

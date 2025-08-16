@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { GraduationCap, Briefcase, Code, Star, Cpu, PenTool, Database, Terminal, Award, Calendar, MapPin, Zap, BookOpen, Target, Trophy, Play, Pause } from 'lucide-react';
+import { GraduationCap, Briefcase, Code, Star, Cpu, PenTool, Database, Terminal, Award, Calendar, MapPin, Zap, BookOpen, Target, Trophy } from 'lucide-react';
 
 // Enhanced Data for Education & Skills
 const educationData = [
@@ -11,7 +11,7 @@ const educationData = [
     location: "Punjab, India",
     icon: <GraduationCap />,
     description: "Specializing in Computer Science and Engineering with focus on Full Stack Development",
-    grade: "Current CGPA: 7/10"
+    grade: "Current CGPA: 7.1/10"
   },
   {
     degree: "Software Engineering Internship",
@@ -139,29 +139,17 @@ const QualificationsSection = () => {
     { id: 'devops', name: 'DevOps', icon: <Cpu /> },
   ];
 
-  const toggleAutoScroll = () => {
-    setIsAutoScrolling(prev => !prev);
-  };
-
-  const handleMouseEnter = () => {
-    setIsAutoScrolling(false);
-  };
-
-  const handleMouseLeave = () => {
-    setIsAutoScrolling(true);
-  };
-
   return (
     <section
       id="qualifications"
       ref={sectionRef}
-      className="relative min-h-screen font-sans flex items-center py-12 sm:py-20 md:py-24 px-2 sm:px-4 md:px-6 lg:px-8"
+      className="relative min-h-screen font-sans py-16 sm:py-20 md:py-24 lg:py-32 px-4 sm:px-6 md:px-8 lg:px-12"
     >
       
-      <div className="max-w-6xl w-full mx-auto z-10 px-2 sm:px-0">
+      <div className="max-w-7xl w-full mx-auto z-10">
         
         {/* Terminal Header */}
-        <div className={`mb-16 transition-all duration-1000 ease-out animate-on-scroll ${
+        <div className={`mb-8 sm:mb-12 md:mb-16 transition-all duration-1000 ease-out animate-on-scroll ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
           <div className="bg-slate-800/50 backdrop-blur-sm rounded-t-lg p-3 border-b border-slate-700/50 animate-on-scroll">
@@ -193,10 +181,10 @@ const QualificationsSection = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-8 md:gap-12 xl:gap-16 animate-on-scroll">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-10 md:gap-12 xl:gap-16 animate-on-scroll items-start">
           
           {/* Left Column: Education & Achievements */}
-          <div className={`col-span-1 md:col-span-2 lg:col-span-2 space-y-8 transition-all duration-1000 ease-out animate-on-scroll ${
+          <div className={`col-span-1 lg:col-span-2 space-y-6 sm:space-y-8 transition-all duration-1000 ease-out animate-on-scroll ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
           }`}>
             
@@ -277,28 +265,21 @@ const QualificationsSection = () => {
           </div>
 
           {/* Right Column: Skills */}
-          <div className={`col-span-1 md:col-span-2 lg:col-span-3 space-y-8 transition-all duration-1000 ease-out delay-200 ${
+          <div className={`col-span-1 lg:col-span-3 space-y-6 sm:space-y-8 transition-all duration-1000 ease-out delay-200 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
           }`}>
             
             <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl sm:text-2xl font-bold text-white flex items-center gap-2 sm:gap-4">
-                  <div className="text-cyan-400 bg-slate-800 p-1.5 sm:p-2 rounded-lg">
+              <div className="mb-4">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white flex items-center gap-3 sm:gap-4">
+                  <div className="text-cyan-400 bg-slate-800 p-2 sm:p-2.5 rounded-lg flex-shrink-0">
                     <Terminal className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
-                  <span className="text-cyan-400">technical_skills</span>
-                  <span className="text-slate-500 hidden sm:inline">.filter()</span>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                    <span className="text-cyan-400 text-sm sm:text-base md:text-lg">technical_skills</span>
+                    <span className="text-slate-500 text-xs sm:text-sm hidden sm:inline">.filter()</span>
+                  </div>
                 </h3>
-                
-                {/* Auto-scroll control */}
-                <button
-                  onClick={toggleAutoScroll}
-                  className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 hover:bg-slate-700/50 rounded-lg border border-slate-700 hover:border-cyan-400 transition-all duration-300 text-xs sm:text-sm text-slate-300 hover:text-cyan-400"
-                >
-                  {isAutoScrolling ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
-                  <span className="hidden sm:inline">{isAutoScrolling ? 'Pause' : 'Play'}</span>
-                </button>
               </div>
               
               {/* Skill Categories Filter */}
@@ -322,22 +303,20 @@ const QualificationsSection = () => {
               </div>
 
               {/* Auto-Scrolling Skills Carousel */}
-              <div className="relative overflow-hidden rounded-lg bg-slate-800/20 backdrop-blur-sm border border-slate-700/50">
+              <div className="relative overflow-hidden rounded-lg bg-slate-800/20 backdrop-blur-sm border border-slate-700/50 w-full max-w-full">
                 <div
                   ref={scrollContainerRef}
-                  className="flex gap-4 py-4 px-2 overflow-x-auto scrollbar-hide"
+                  className="flex gap-4 sm:gap-5 py-4 px-3 overflow-x-auto scrollbar-hide w-full"
                   style={{
                     scrollBehavior: 'smooth',
                     transform: 'translateZ(0)', // Hardware acceleration
                   }}
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
                 >
                   {/* Duplicate skills for infinite scroll effect */}
                   {[...filteredSkills, ...filteredSkills].map((skill, index) => (
                     <div
                       key={`${skill.name}-${index}`}
-                      className="group flex-shrink-0 w-64 sm:w-72 bg-slate-800/60 backdrop-blur-sm rounded-lg border border-slate-700 hover:border-cyan-400 transition-all duration-300 p-4 relative overflow-hidden"
+                      className="group flex-shrink-0 w-72 sm:w-80 lg:w-84 bg-slate-800/60 backdrop-blur-sm rounded-lg border border-slate-700 hover:border-cyan-400 transition-all duration-300 p-4 sm:p-5 relative overflow-hidden"
                       onMouseEnter={() => setHoveredSkill(index)}
                       onMouseLeave={() => setHoveredSkill(null)}
                     >
@@ -345,18 +324,18 @@ const QualificationsSection = () => {
                       <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       
                       <div className="relative z-10">
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="flex items-center gap-3 min-w-0 flex-1">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-3 min-w-0 flex-1 pr-2">
                             <div className="text-cyan-400 group-hover:text-cyan-300 transition-colors flex-shrink-0 group-hover:scale-110 transform transition-transform duration-300">
-                              <div className="w-5 h-5 sm:w-6 sm:h-6">
+                              <div className="w-6 h-6 sm:w-7 sm:h-7">
                                 {skill.icon}
                               </div>
                             </div>
-                            <span className="text-white font-medium text-sm sm:text-base truncate group-hover:text-cyan-100 transition-colors">
+                            <span className="text-white font-medium text-sm sm:text-base lg:text-lg truncate group-hover:text-cyan-100 transition-colors">
                               {skill.name}
                             </span>
                           </div>
-                          <span className="text-cyan-400 font-mono text-sm flex-shrink-0 ml-2 group-hover:text-cyan-300 transition-colors">
+                          <span className="text-cyan-400 font-mono text-sm sm:text-base flex-shrink-0 ml-3 group-hover:text-cyan-300 transition-colors">
                             {skill.level}%
                           </span>
                         </div>
@@ -376,13 +355,13 @@ const QualificationsSection = () => {
                         </div>
                         
                         {/* Enhanced Category Tag */}
-                        <div className="flex justify-between items-center mt-3">
-                          <span className="text-xs text-slate-500 font-sans bg-slate-900/30 px-2 py-1 rounded">
+                        <div className="flex justify-between items-center mt-4">
+                          <span className="text-xs sm:text-sm text-slate-500 font-sans bg-slate-900/30 px-3 py-1.5 rounded">
                             .{skill.category}
                           </span>
                           {hoveredSkill === index && (
-                            <div className="flex items-center gap-1 text-xs text-cyan-400 animate-fade-in">
-                              <Zap className="w-3 h-3 animate-pulse" />
+                            <div className="flex items-center gap-2 text-xs sm:text-sm text-cyan-400 animate-fade-in">
+                              <Zap className="w-3 h-3 sm:w-4 sm:h-4 animate-pulse" />
                               <span className="hidden sm:inline font-mono">proficient</span>
                             </div>
                           )}
@@ -406,8 +385,8 @@ const QualificationsSection = () => {
               
               {/* Skills count indicator */}
               <div className="text-center">
-                <span className="text-xs text-slate-500 font-sans bg-slate-800/30 px-3 py-1 rounded-full">
-                  {filteredSkills.length} skills loaded • Auto-scrolling {isAutoScrolling ? 'enabled' : 'paused'}
+                <span className="text-xs sm:text-sm text-slate-500 font-sans bg-slate-800/30 px-4 py-2 rounded-full">
+                  {filteredSkills.length} skills loaded
                 </span>
               </div>
             </div>

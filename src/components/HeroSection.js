@@ -8,11 +8,11 @@ const HeroSection = ({ scrollToSection }) => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center text-white font-sans">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-20 z-10">
-        <div className="grid lg:grid-cols-5 gap-8 md:gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-20 z-10">
+        <div className="flex flex-col lg:grid lg:grid-cols-5 gap-6 sm:gap-8 md:gap-16 items-center">
           
           {/* Mobile-First Image Content - Shows first on mobile - Smooth initial load */}
-          <div className="lg:col-span-2 lg:order-2 flex items-center justify-center animate-fade-in-right mb-8 lg:mb-0">
+          <div className="w-full lg:col-span-2 lg:order-2 flex items-center justify-center animate-fade-in-right mb-6 sm:mb-8 lg:mb-0">
             <div className="relative group">
               {/* Outer Glow - Smaller on mobile */}
               <div className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 rounded-full blur-xl md:blur-2xl opacity-30 group-hover:opacity-60 transition duration-500 animate-pulse-slow"></div>
@@ -44,7 +44,7 @@ const HeroSection = ({ scrollToSection }) => {
           </div>
           
           {/* Text Content - Shows second on mobile with better spacing - Smooth initial load */}
-          <div className="lg:col-span-3 lg:order-1 space-y-6 md:space-y-8 animate-fade-in-up">
+          <div className="w-full lg:col-span-3 lg:order-1 space-y-4 sm:space-y-6 md:space-y-8 animate-fade-in-up">
             
             {/* Terminal Header - Mobile optimized */}
             <div className="bg-slate-800/50 backdrop-blur-sm rounded-t-lg p-2 md:p-3 border-b border-slate-700/50">
@@ -59,16 +59,16 @@ const HeroSection = ({ scrollToSection }) => {
             </div>
             
             {/* Terminal Content - Enhanced mobile layout */}
-            <div className="bg-slate-800/30 backdrop-blur-sm rounded-b-lg p-4 sm:p-6 md:p-8 border border-slate-700/50">
-              <div className="space-y-4 md:space-y-6">
+            <div className="bg-slate-800/30 backdrop-blur-sm rounded-b-lg p-3 sm:p-4 md:p-6 lg:p-8 border border-slate-700/50">
+              <div className="space-y-3 sm:space-y-4 md:space-y-6">
                 <div className="text-cyan-400 text-xs md:text-sm">
                   <span className="text-green-400">$</span> whoami
                 </div>
                 
                 {/* Responsive heading with better mobile scaling */}
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tighter leading-tight">
-                  <span className="block text-white mb-4 tracking-wide">Aditya Kumar</span>
-                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 text-sm sm:text-base md:text-lg lg:text-xl font-normal tracking-wide">
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tighter leading-tight">
+                  <span className="block text-white mb-2 sm:mb-3 md:mb-4 tracking-wide">Aditya Kumar</span>
+                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-normal tracking-wide">
                     {role}
                   </span>
                 </h1>
@@ -78,7 +78,7 @@ const HeroSection = ({ scrollToSection }) => {
                   <div className="text-green-400 text-xs md:text-sm">
                     <span className="text-green-400">$</span> cat about.txt
                   </div>
-                  <p className="text-sm sm:text-base md:text-lg lg:text-xl max-w-2xl pl-3 md:pl-4 border-l-2 border-cyan-400/50 leading-relaxed">
+                  <p className="text-xs sm:text-sm md:text-base lg:text-lg max-w-2xl pl-2 sm:pl-3 md:pl-4 border-l-2 border-cyan-400/50 leading-relaxed">
                     Hello there! I'm a third-year B.Tech student at Lovely Professional University, 
                     currently interning at Larsen & Toubro. I specialize in building modern, 
                     responsive, and user-friendly web applications.
@@ -95,42 +95,42 @@ const HeroSection = ({ scrollToSection }) => {
             </div>
             
             {/* Action Buttons - Enhanced mobile layout */}
-            <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:gap-4">
+            <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:gap-3 md:gap-4">
               <button 
                 onClick={() => scrollToSection('contact')}
-                className="group relative overflow-hidden bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 border border-cyan-400/50 text-sm sm:text-base"
+                className="group relative overflow-hidden bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 border border-cyan-400/50 text-xs sm:text-sm md:text-base"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <span className="relative flex items-center justify-center">
-                  <Terminal className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3" />
+                  <Terminal className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-1.5 sm:mr-2 md:mr-3" />
                   ./contact
-                  <Mail className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3 transition-transform duration-300 group-hover:-translate-x-1" />
+                  <Mail className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-1.5 sm:ml-2 md:ml-3 transition-transform duration-300 group-hover:-translate-x-1" />
                 </span>
               </button>
               
               <button 
                 onClick={() => scrollToSection('about')}
-                className="group bg-slate-800/50 backdrop-blur-sm text-slate-300 font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-lg border border-slate-600 hover:bg-slate-700/50 hover:text-white hover:border-cyan-400 transition-all duration-300 text-sm sm:text-base"
+                className="group bg-slate-800/50 backdrop-blur-sm text-slate-300 font-semibold px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg border border-slate-600 hover:bg-slate-700/50 hover:text-white hover:border-cyan-400 transition-all duration-300 text-xs sm:text-sm md:text-base"
               >
                 <span className="flex items-center justify-center">
-                  <Code className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3" />
+                  <Code className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-1.5 sm:mr-2 md:mr-3" />
                   View Projects
-                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3 transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-1.5 sm:ml-2 md:ml-3 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
               </button>
             </div>
             
             {/* Quick Stats - Mobile responsive with better wrapping */}
-            <div className="flex flex-wrap items-center gap-4 sm:gap-6 md:gap-8 text-xs sm:text-sm text-slate-400">
-              <div className="flex items-center space-x-2">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 text-xs sm:text-sm text-slate-400">
+              <div className="flex items-center space-x-1.5 sm:space-x-2">
                 <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full animate-pulse"></div>
                 <span>Online</span>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1.5 sm:space-x-2">
                 <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" />
                 <span>Fast learner</span>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1.5 sm:space-x-2">
                 <Github className="w-3 h-3 sm:w-4 sm:h-4 text-purple-400" />
                 <span>Open source</span>
               </div>
