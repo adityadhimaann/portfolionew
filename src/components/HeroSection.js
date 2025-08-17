@@ -3,7 +3,7 @@ import { Mail, ArrowRight, Code, Terminal, Zap, Github, ExternalLink } from 'luc
 import heroImg from '../assets/b.png'; // Make sure the path is correct
 
 const HeroSection = ({ scrollToSection }) => {
-  const role = 'Full Stack Developer    •    UI/UX Designer    •    Problem Solver';
+  const role = 'Full Stack Developer    •    UI/UX Designer    •    Tech Enthusiast';
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center text-white font-sans">
