@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import { Mail, MapPin, Send, Github, Instagram, Linkedin, Code, Terminal, Zap, Coffee } from 'lucide-react';
+import { MapPin, Send, Github, Instagram, Linkedin, Code, Terminal, Zap, Coffee } from 'lucide-react';
 
 // You can keep using require if it works for your setup
 const aImg = require('../assets/a.jpg');
@@ -18,7 +18,7 @@ const ContactSection = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(entry.target);
+         
         }
       },
       { threshold: 0.15 }
@@ -68,14 +68,13 @@ const ContactSection = () => {
       className="relative min-h-screen font-sans flex items-center py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8"
     >
       
-      <div className="max-w-6xl mx-auto w-full z-10 animate-on-scroll">
+      <div className="max-w-6xl mx-auto w-full z-10 scroll-animate">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center">
-          
-          {/* Left Column: Enhanced Image with Developer Theme */}
-          <div className={`order-2 lg:order-1 transition-all duration-1000 ease-out animate-on-scroll ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+          {/* Left Column */}
+          <div className={`order-2 lg:order-1 transition-all duration-600 ease-out scroll-animate ${
+            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-6'
           }`}>
-            <div className="relative max-w-md mx-auto lg:max-w-none animate-on-scroll">
+            <div className="relative max-w-md mx-auto lg:max-w-none scroll-animate">
               {/* Terminal Window Frame */}
               <div className="bg-slate-800 rounded-t-lg p-2 sm:p-3 border-b border-slate-700">
                 <div className="flex items-center space-x-2">

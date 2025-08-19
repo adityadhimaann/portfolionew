@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Mail, ArrowRight, Code, Terminal, Zap, Github, ExternalLink } from 'lucide-react';
+import React from 'react';
+import { Mail, ArrowRight, Code, Terminal } from 'lucide-react';
 import heroImg from '../assets/b.png'; // Make sure the path is correct
 
 const HeroSection = ({ scrollToSection }) => {
@@ -12,39 +12,40 @@ const HeroSection = ({ scrollToSection }) => {
         <div className="flex flex-col lg:grid lg:grid-cols-5 gap-6 sm:gap-8 md:gap-16 items-center">
           
           {/* Mobile-First Image Content - Shows first on mobile - Smooth initial load */}
-          <div className="w-full lg:col-span-2 lg:order-2 flex items-center justify-center animate-fade-in-right mb-6 sm:mb-8 lg:mb-0">
-            <div className="relative group">
+          <div className="w-full lg:col-span-2 lg:order-2 flex items-center justify-center animate-smooth-slide-in-right delay-200 mb-6 sm:mb-8 lg:mb-0">
+            <div className="relative group gpu-accelerated">
               {/* Outer Glow - Smaller on mobile */}
-              <div className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 rounded-full blur-xl md:blur-2xl opacity-30 group-hover:opacity-60 transition duration-500 animate-pulse-slow"></div>
+              <div className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 rounded-full blur-xl md:blur-2xl opacity-30 group-hover:opacity-60 smooth-animation animate-efficient-pulse"></div>
               
               {/* Border Animation - Responsive */}
-              <div className="absolute -inset-1 md:-inset-2 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full blur-sm opacity-50 group-hover:opacity-100 transition duration-500 animate-spin-slow"></div>
+              <div className="absolute -inset-1 md:-inset-2 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full blur-sm opacity-50 group-hover:opacity-100 smooth-animation animate-minimal-float"></div>
               
               {/* Image Container - Responsive sizing */}
               <div className="relative bg-slate-800 p-1 md:p-2 rounded-full">
                 <img
                   src={heroImg}
                   alt="Aditya Kumar"
-                  className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 object-cover rounded-full shadow-2xl border-2 border-slate-700 group-hover:border-amber-400 transition-all duration-300"
+                  className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 object-cover rounded-full shadow-2xl border-2 border-slate-700 group-hover:border-amber-400 smooth-animation"
+                  loading="eager"
                 />
                 
                 {/* Status Badge - Responsive positioning */}
-                <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-slate-800 p-1.5 md:p-2 rounded-full border border-slate-600 group-hover:border-amber-400 transition-all duration-300">
+                <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-slate-800 p-1.5 md:p-2 rounded-full border border-slate-600 group-hover:border-amber-400 smooth-animation">
                   <div className="flex items-center space-x-1">
-                    <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-500 rounded-full animate-efficient-pulse"></div>
                     <span className="text-xs text-slate-300 font-mono">dev</span>
                   </div>
                 </div>
               </div>
               
               {/* Floating Elements - Hidden on very small screens */}
-              <div className="hidden sm:block absolute -top-4 md:-top-8 -left-4 md:-left-8 text-cyan-400/60 text-xl md:text-2xl animate-bounce">{'</'}</div>
-              <div className="hidden sm:block absolute -bottom-4 md:-bottom-8 -right-4 md:-right-8 text-blue-400/60 text-xl md:text-2xl animate-bounce delay-1000">{'>'}</div>
+              <div className="hidden sm:block absolute -top-4 md:-top-8 -left-4 md:-left-8 text-cyan-400/60 text-xl md:text-2xl animate-minimal-float">{'</'}</div>
+              <div className="hidden sm:block absolute -bottom-4 md:-bottom-8 -right-4 md:-right-8 text-blue-400/60 text-xl md:text-2xl animate-minimal-float delay-500">{'>'}</div>
             </div>
           </div>
           
           {/* Text Content - Shows second on mobile with better spacing - Smooth initial load */}
-          <div className="w-full lg:col-span-3 lg:order-1 space-y-4 sm:space-y-6 md:space-y-8 animate-fade-in-up">
+          <div className="w-full lg:col-span-3 lg:order-1 space-y-4 sm:space-y-6 md:space-y-8 animate-smooth-slide-up">
             
             {/* Terminal Header - Mobile optimized */}
             <div className="bg-slate-800/50 backdrop-blur-sm rounded-t-lg p-2 md:p-3 border-b border-slate-700/50">
@@ -127,11 +128,11 @@ const HeroSection = ({ scrollToSection }) => {
                 <span>Online</span>
               </div>
               <div className="flex items-center space-x-1.5 sm:space-x-2">
-                <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" />
+                <span className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400">⚡</span>
                 <span>Fast learner</span>
               </div>
               <div className="flex items-center space-x-1.5 sm:space-x-2">
-                <Github className="w-3 h-3 sm:w-4 sm:h-4 text-purple-400" />
+                <span className="w-3 h-3 sm:w-4 sm:h-4 text-purple-400">🌐</span>
                 <span>Open source</span>
               </div>
             </div>

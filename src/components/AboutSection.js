@@ -69,7 +69,7 @@ const journeyData = [
 const JourneyCard = ({ item, isVisible, delay, index, hoveredCard, onCardHover, onCardLeave }) => {
   return (
     <div 
-      className={`flex-shrink-0 w-80 sm:w-96 h-auto bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:bg-white/15 mx-4 group ${hoveredCard === index ? 'ring-2 ring-blue-400/50' : ''} ${
+      className={`flex-shrink-0 w-80 sm:w-96 h-auto bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 shadow-lg hover:shadow-2xl smooth-animation hover:scale-105 hover:bg-white/15 mx-4 group gpu-accelerated ${hoveredCard === index ? 'ring-2 ring-blue-400/50' : ''} ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}
       style={{ transitionDelay: `${delay}ms` }}
@@ -78,7 +78,7 @@ const JourneyCard = ({ item, isVisible, delay, index, hoveredCard, onCardHover, 
     >
       <div className="flex justify-between items-start mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
+          <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-efficient-pulse"></div>
           <span className="text-sm font-medium text-blue-300 bg-blue-500/20 px-3 py-1 rounded-full">
             {item.year}
           </span>
@@ -92,7 +92,7 @@ const JourneyCard = ({ item, isVisible, delay, index, hoveredCard, onCardHover, 
         <img
           src={item.image}
           alt={item.title}
-          className="w-full h-48 object-contain group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-48 object-contain group-hover:scale-105 smooth-animation gpu-accelerated"
           loading="lazy"
         />
       </div>
@@ -152,42 +152,50 @@ const AboutSection = () => {
     };
   }, []);
 
-  // Auto-scroll effect for journey cards
+  // Auto-scroll effect for journey cards (time-based for smoother motion & lower layout pressure)
   useEffect(() => {
     if (!isAutoScrolling || !scrollContainerRef.current || !isVisible) return;
 
     let animationId;
-    
-    const animate = () => {
-      if (scrollContainerRef.current && isAutoScrolling) {
-        const container = scrollContainerRef.current.parentElement;
-        const maxScroll = scrollContainerRef.current.scrollWidth - container.clientWidth;
-        
-        if (container.scrollLeft >= maxScroll) {
-          // Instant reset to start for continuous infinite loop
-          container.scrollLeft = 0;
-          setScrollPosition(0);
-        } else {
-          // Continuous smooth auto-scroll
-          container.scrollLeft += 5; // Slow continuous movement
-          setScrollPosition(container.scrollLeft);
-        }
-      }
-      
-      if (isAutoScrolling) {
-        animationId = requestAnimationFrame(animate);
-      }
+    let lastTime = performance.now();
+    let currentSpeed = 0; // animated toward target for smoother feel
+
+    const computeTargetSpeed = () => {
+      const container = scrollContainerRef.current?.parentElement;
+      if (!container) return 0;
+      // Base speed scaled a bit by viewport width for larger screens
+      const base = 90; // base px/sec (increased for user request)
+      const scale = Math.min(1.4, Math.max(0.8, window.innerWidth / 1400));
+      return base * scale;
     };
 
-    // Start animation immediately with no delay
-    if (isAutoScrolling) {
-      animationId = requestAnimationFrame(animate);
-    }
+    let targetSpeed = computeTargetSpeed();
+    const onResize = () => { targetSpeed = computeTargetSpeed(); };
+    window.addEventListener('resize', onResize);
 
-    return () => {
-      if (animationId) {
-        cancelAnimationFrame(animationId);
+    const animate = (time) => {
+      if (!isAutoScrolling || !scrollContainerRef.current) return;
+      const dt = time - lastTime; // ms
+      lastTime = time;
+      const container = scrollContainerRef.current.parentElement;
+      if (!container) return;
+      const maxScroll = scrollContainerRef.current.scrollWidth - container.clientWidth;
+
+      // Ease speed toward target (simple exponential smoothing)
+      currentSpeed += (targetSpeed - currentSpeed) * 0.08;
+      container.scrollLeft += (currentSpeed * dt) / 1000;
+
+      if (container.scrollLeft >= maxScroll) {
+        container.scrollLeft = 0; // loop
       }
+      setScrollPosition(container.scrollLeft);
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animationId = requestAnimationFrame(animate);
+    return () => {
+      window.removeEventListener('resize', onResize);
+      cancelAnimationFrame(animationId);
     };
   }, [isAutoScrolling, isVisible]);
 
@@ -260,25 +268,23 @@ const AboutSection = () => {
       >
       
       <div className="w-full max-w-7xl mx-auto z-10">
-        <div className={`text-center mb-16 transition-all duration-1000 animate-on-scroll ${
+        <div className={`text-center mb-16 transition-all duration-1000 scroll-animate ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
-          <div className="inline-flex items-center justify-center p-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full mb-6 shadow-lg shadow-indigo-500/20 animate-on-scroll">
+          <div className="inline-flex items-center justify-center p-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full mb-6 shadow-lg shadow-indigo-500/20 scroll-animate">
             <Sparkles className="w-6 h-6 text-white" />
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-br from-white via-slate-300 to-slate-500 bg-clip-text text-transparent mb-4 tracking-tight animate-on-scroll">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-br from-white via-slate-300 to-slate-500 bg-clip-text text-transparent mb-4 tracking-tight scroll-animate">
             My Journey in Tech
           </h2>
-          <p className="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed animate-on-scroll">
+          <p className="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed scroll-animate">
             A timeline of my key experiences in development, leadership, and community contribution.
           </p>
         </div>
 
         {/* Auto-scrolling Journey Carousel */}
-        <div className="relative animate-on-scroll">
-          {/* Gradient overlays for fade effect */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none"></div>
+        <div className="relative scroll-animate">
+          {/* Removed dark gradient side overlays for cleaner background */}
           
           {/* Scroll buttons */}
           <button
