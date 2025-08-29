@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo, Suspense } from 'reac
 import Navigation from './components/Navigation';
 import HeroSection from './components/HeroSection';
 import FloatingActionButton from './components/FloatingActionButton';
+import ContactPopup from './components/ContactPopup';
 import OptimizedBackground from './components/OptimizedBackground';
 import OptimizedCursorEffect from './components/OptimizedCursorEffect';
 import { createOptimizedObserver, supportsHighPerformance } from './utils/performanceUtils';
@@ -105,6 +106,9 @@ const PortfolioWebsite = () => {
 
   return (
     <div className="min-h-screen relative gpu-accelerated">
+      {/* Contact Popup */}
+      <ContactPopup />
+      
       {/* Optimized Background */}
       <OptimizedBackground isHighPerformance={shouldRenderEffects} />
       
