@@ -13,24 +13,29 @@ const HeroSection = ({ scrollToSection }) => {
           
           {/* Mobile-First Image Content - Shows first on mobile - Smooth initial load */}
           <div className="w-full lg:col-span-2 lg:order-2 flex items-center justify-center animate-smooth-slide-in-right delay-200 mb-6 sm:mb-8 lg:mb-0">
-            <div className="relative group gpu-accelerated">
-              {/* Outer Glow - Smaller on mobile */}
-              <div className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 rounded-full blur-xl md:blur-2xl opacity-30 group-hover:opacity-60 smooth-animation animate-efficient-pulse"></div>
+            <div className="relative group gpu-accelerated flex items-center justify-center">
+              {/* Outer Glow - Perfectly centered with precise positioning */}
+              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[60%]">
+                <div className="w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-84 lg:h-84 bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 rounded-full blur-xl md:blur-2xl opacity-30 group-hover:opacity-60 smooth-animation animate-efficient-pulse shadow-2xl shadow-blue-500/40"></div>
+              </div>
               
-              {/* Border Animation - Responsive */}
-              <div className="absolute -inset-1 md:-inset-2 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full blur-sm opacity-50 group-hover:opacity-100 smooth-animation animate-minimal-float"></div>
+              {/* Border Animation - Perfectly centered with precise positioning */}
+              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[51%]">
+                <div className="w-50 h-50 sm:w-58 sm:h-58 md:w-68 md:h-68 lg:w-80 lg:h-80 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full blur-sm opacity-50 group-hover:opacity-100 smooth-animation animate-minimal-float shadow-xl shadow-cyan-400/30"></div>
+              </div>
               
-              {/* Image Container - Responsive sizing */}
-              <div className="relative bg-slate-800 p-1 md:p-2 rounded-full">
+              {/* Image Container - Perfectly centered */}
+              <div className="relative bg-slate-800 p-1 md:p-2 rounded-full flex items-center justify-center shadow-2xl shadow-blue-600/50">
                 <img
                   src={heroImg}
                   alt="Aditya Kumar"
-                  className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 object-cover rounded-full shadow-2xl border-2 border-slate-700 group-hover:border-amber-400 smooth-animation"
+                  className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 object-cover rounded-full shadow-2xl shadow-blue-500/60 border-2 border-slate-700 group-hover:border-cyan-400 smooth-animation object-center"
+                  style={{ filter: 'drop-shadow(0 -2px 20px rgba(59, 130, 246, 0.4))' }}
                   loading="eager"
                 />
                 
                 {/* Status Badge - Responsive positioning */}
-                <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-slate-800 p-1.5 md:p-2 rounded-full border border-slate-600 group-hover:border-amber-400 smooth-animation">
+                <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-slate-800 p-1.5 md:p-2 rounded-full border border-slate-600 group-hover:border-cyan-400 smooth-animation shadow-lg shadow-cyan-500/40">
                   <div className="flex items-center space-x-1">
                     <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-500 rounded-full animate-efficient-pulse"></div>
                     <span className="text-xs text-slate-300 font-mono">dev</span>
