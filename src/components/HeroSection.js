@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, ArrowRight, Code, Terminal } from 'lucide-react';
+import { Mail, ArrowRight, Code, Terminal, Briefcase } from 'lucide-react';
 import heroImg from '../assets/b.png'; // Make sure the path is correct
 
 const HeroSection = ({ scrollToSection }) => {
@@ -95,30 +95,44 @@ const HeroSection = ({ scrollToSection }) => {
               </div>
             </div>
             
-            {/* Action Buttons - Enhanced mobile layout */}
-            <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:gap-3 md:gap-4">
+            {/* Action Buttons - Optimized compact layout */}
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4">
               <button 
                 onClick={() => scrollToSection('contact')}
-                className="group relative overflow-hidden bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 border border-cyan-400/50 text-xs sm:text-sm md:text-base"
+                className="group relative overflow-hidden bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 border border-cyan-400/50 text-xs sm:text-sm"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <span className="relative flex items-center justify-center">
-                  <Terminal className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-1.5 sm:mr-2 md:mr-3" />
+                  <Terminal className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                   ./contact
-                  <Mail className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-1.5 sm:ml-2 md:ml-3 transition-transform duration-300 group-hover:-translate-x-1" />
+                  <Mail className="w-3 h-3 sm:w-4 sm:h-4 ml-1 sm:ml-2 transition-transform duration-300 group-hover:-translate-x-1" />
                 </span>
               </button>
               
               <button 
                 onClick={() => scrollToSection('about')}
-                className="group bg-slate-800/50 backdrop-blur-sm text-slate-300 font-semibold px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-lg border border-slate-600 hover:bg-slate-700/50 hover:text-white hover:border-cyan-400 transition-all duration-300 text-xs sm:text-sm md:text-base"
+                className="group bg-slate-800/50 backdrop-blur-sm text-slate-300 font-semibold px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-lg border border-slate-600 hover:bg-slate-700/50 hover:text-white hover:border-cyan-400 transition-all duration-300 text-xs sm:text-sm"
               >
                 <span className="flex items-center justify-center">
-                  <Code className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-1.5 sm:mr-2 md:mr-3" />
+                  <Code className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                   View Projects
-                  <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-1.5 sm:ml-2 md:ml-3 transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1 sm:ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
               </button>
+
+              <a 
+                href="http://www.fiverr.com/s/wkoZmxA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative overflow-hidden bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-green-500/25 hover:shadow-green-500/40 border border-green-400/50 text-xs sm:text-sm"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative flex items-center justify-center">
+                  <Briefcase className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                  Hire Me
+                  <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1 sm:ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                </span>
+              </a>
             </div>
             
             {/* Quick Stats - Mobile responsive with better wrapping */}

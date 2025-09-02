@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import { MapPin, Send, Github, Instagram, Linkedin, Code, Terminal, Zap, Coffee } from 'lucide-react';
+import { MapPin, Send, Github, Instagram, Linkedin, Code, Terminal, Zap, Coffee, Briefcase } from 'lucide-react';
 
 // You can keep using require if it works for your setup
 const aImg = require('../assets/a.jpg');
@@ -255,6 +255,14 @@ const ContactSection = () => {
                     className="p-2 sm:p-2.5 bg-slate-800 rounded-lg border border-slate-600 text-slate-400 hover:text-white hover:border-cyan-400 transition-all duration-300 hover:bg-slate-700"
                   >
                     <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </a>
+                  <a 
+                    href="http://www.fiverr.com/s/wkoZmxA" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="p-2 sm:p-2.5 bg-slate-800 rounded-lg border border-slate-600 text-slate-400 hover:text-white hover:border-green-400 transition-all duration-300 hover:bg-slate-700"
+                  >
+                    <Briefcase className="w-4 h-4 sm:w-5 sm:h-5" />
                   </a>
                 </div>
               </div>
