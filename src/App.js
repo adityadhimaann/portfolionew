@@ -5,6 +5,7 @@ import FloatingActionButton from './components/FloatingActionButton';
 import ContactPopup from './components/ContactPopup';
 import OptimizedBackground from './components/OptimizedBackground';
 import OptimizedCursorEffect from './components/OptimizedCursorEffect';
+import EnhancedChatbot from './components/EnhancedChatbot';
 import { createOptimizedObserver, supportsHighPerformance } from './utils/performanceUtils';
 import './styles/mobile-enhancements.css';
 import './styles/performance-animations.css';
@@ -105,29 +106,33 @@ const PortfolioWebsite = () => {
   }, [isHighPerformance]);
 
   return (
-    <div className="min-h-screen relative gpu-accelerated">
-      {/* Contact Popup */}
-      <ContactPopup />
-      
-      {/* Optimized Background */}
-      <OptimizedBackground isHighPerformance={shouldRenderEffects} />
-      
-      {/* Optimized Cursor Effect */}
-      {shouldRenderEffects && <OptimizedCursorEffect />}
-      
-      {/* Content Layer */}
-      <div className="relative z-10 min-h-screen">
-        <Navigation activeSection={activeSection} scrollToSection={scrollToSection} />
-        <HeroSection scrollToSection={scrollToSection} />
-        <Suspense fallback={<div className="text-center py-20 text-slate-400">Loading content...</div>}>
-          <AboutSection isVisible={isVisible} />
-          <ExperienceSection isVisible={isVisible} />
-          <QualificationsSection isVisible={isVisible} />
-          <ContactSection isVisible={isVisible} />
-        </Suspense>
-        <FloatingActionButton scrollToSection={scrollToSection} />
+    <>
+      <div className="min-h-screen relative gpu-accelerated">
+        {/* Contact Popup */}
+        <ContactPopup />
+        
+        {/* Optimized Background */}
+        <OptimizedBackground isHighPerformance={shouldRenderEffects} />
+        
+        {/* Optimized Cursor Effect */}
+        {shouldRenderEffects && <OptimizedCursorEffect />}
+        
+        {/* Content Layer */}
+        <div className="relative z-10 min-h-screen">
+          <Navigation activeSection={activeSection} scrollToSection={scrollToSection} />
+          <HeroSection scrollToSection={scrollToSection} />
+          <Suspense fallback={<div className="text-center py-20 text-slate-400">Loading content...</div>}>
+            <AboutSection isVisible={isVisible} />
+            <ExperienceSection isVisible={isVisible} />
+            <QualificationsSection isVisible={isVisible} />
+            <ContactSection isVisible={isVisible} />
+          </Suspense>
+          <FloatingActionButton scrollToSection={scrollToSection} />
+        </div>
       </div>
-    </div>
+      {/* EnhancedChatbot moved outside all other divs to ensure it stays fixed */}
+      <EnhancedChatbot />
+    </>
   );
 };
 
