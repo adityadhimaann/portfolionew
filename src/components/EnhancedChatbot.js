@@ -491,7 +491,7 @@ const EnhancedChatbot = () => {
   const inputRef = useRef(null);
   
   // Get backend URL from environment variable or use default
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5001'\;
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5001';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
