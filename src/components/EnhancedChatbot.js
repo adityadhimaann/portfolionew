@@ -324,6 +324,33 @@ const MessageTime = styled.span`
   display: block;
 `;
 
+// Component to render markdown-formatted text
+const MarkdownText = ({ children }) => {
+  const formatText = (text) => {
+    if (!text) return text;
+    
+    // Split by **bold** markers while preserving the structure
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    
+    return parts.map((part, index) => {
+      // If the part is wrapped in **, make it bold
+      if (part.startsWith('**') && part.endsWith('**')) {
+        const boldText = part.slice(2, -2); // Remove the ** markers
+        return <strong key={index} style={{ fontWeight: '600', color: '#1f2937' }}>{boldText}</strong>;
+      }
+      // Handle line breaks
+      return part.split('\n').map((line, lineIndex, array) => (
+        <span key={`${index}-${lineIndex}`}>
+          {line}
+          {lineIndex < array.length - 1 && <br />}
+        </span>
+      ));
+    });
+  };
+
+  return <span>{formatText(children)}</span>;
+};
+
 // Typing indicator
 const TypingIndicator = styled.div`
   display: flex;
@@ -1232,7 +1259,7 @@ What specific aspect would you like to know more about?`;
               {messages.map((message) => (
                 <MessageGroup key={message.id} isUser={message.isUser}>
                   <MessageBubble isUser={message.isUser}>
-                    {message.text}
+                    <MarkdownText>{message.text}</MarkdownText>
                     <MessageTime>
                       {formatTime(message.timestamp)}
                     </MessageTime>
