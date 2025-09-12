@@ -5,7 +5,7 @@ import { MapPin, Send, Github, Instagram, Linkedin, Code, Terminal, Zap, Coffee,
 // You can keep using require if it works for your setup
 const aImg = require('../assets/a.jpg');
 
-const ContactSection = () => {
+const ContactSection = ({ isVisible: parentIsVisible }) => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isVisible, setIsVisible] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
@@ -31,6 +31,9 @@ const ContactSection = () => {
       if (currentRef) observer.disconnect();
     };
   }, []);
+
+  // Use parentIsVisible if provided, otherwise use local isVisible
+  const shouldShow = parentIsVisible !== undefined ? parentIsVisible.contact : isVisible;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,7 +75,7 @@ const ContactSection = () => {
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center">
           {/* Left Column */}
           <div className={`order-2 lg:order-1 transition-all duration-600 ease-out scroll-animate ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-6'
+            shouldShow ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-6'
           }`}>
             <div className="relative max-w-md mx-auto lg:max-w-none scroll-animate">
               {/* Terminal Window Frame */}
@@ -124,7 +127,7 @@ const ContactSection = () => {
 
           {/* Right Column: Enhanced Form */}
           <div className={`order-1 lg:order-2 space-y-6 sm:space-y-8 transition-all duration-1000 ease-out delay-200 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+            shouldShow ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
           }`}>
             
             {/* Header with Developer Accent */}

@@ -1,3 +1,9 @@
+// Import images properly for TypeScript
+import eImage from '../assets/e.jpeg';
+import dImage from '../assets/d.jpeg';
+import fImage from '../assets/f.jpeg';
+import gdgImage from '../assets/gdg.jpg';
+
 // Define a type for your journey items for type safety
 export interface JourneyItem {
   title: string;
@@ -13,7 +19,7 @@ export const journeyData: JourneyItem[] = [
     title: "Gromo X AWS Finarva AI 2025",
     role: "CTO @Gromo",
     location: "Gurugram, Haryana",
-    image: '/src/assets/e.jpeg', // Paths should be relative to the public directory or handled by your bundler
+    image: eImage, // Use imported image
     link: "https://gromo.com",
     ariaLabel: "Gromo X AWS Finarva AI 2025 CTO at Gromo"
   },
@@ -21,7 +27,7 @@ export const journeyData: JourneyItem[] = [
     title: "SDE Intern",
     role: "@Larsen & Toubro",
     location: "Faridabad, Haryana",
-    image: '/src/assets/d.jpeg',
+    image: dImage,
     link: "https://www.larsentoubro.com",
     ariaLabel: "SDE Intern at Larsen & Toubro"
   },
@@ -29,7 +35,7 @@ export const journeyData: JourneyItem[] = [
     title: "#building in AI",
     role: "@SarvamAI",
     location: "Noida, Uttar Pradesh",
-    image: '/src/assets/f.jpeg',
+    image: fImage,
     link: "https://sarvam.ai",
     ariaLabel: "Building something creative in AI at SarvamAI"
   },
@@ -37,7 +43,7 @@ export const journeyData: JourneyItem[] = [
     title: "Google Cloud Developers Day",
     role: "@GDG Noida",
     location: "Noida, Uttar Pradesh",
-    image: '/src/assets/gdg.jpg',
+    image: gdgImage,
     link: "https://gdg.community.dev/noida/",
     ariaLabel: "Google Cloud Developers Day 2025 at GDG Noida"
   }

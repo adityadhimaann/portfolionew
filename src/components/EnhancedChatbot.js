@@ -61,8 +61,8 @@ const ChatWidget = styled.div.withConfig({
   clip: unset !important;
   clip-path: none !important;
   contain: none !important;
-  max-width: 100vw !important;
-  max-height: 100vh !important;
+  max-width: calc(100vw - 40px) !important;
+  max-height: calc(100vh - 40px) !important;
   pointer-events: auto !important;
 
   ${props => props.isOpen && css`
@@ -73,10 +73,21 @@ const ChatWidget = styled.div.withConfig({
   `}
 
   @media (max-width: 768px) {
-    width: ${props => props.isOpen ? '350px' : '60px'};
-    height: ${props => props.isOpen ? '500px' : '60px'};
+    width: ${props => props.isOpen ? 'calc(100vw - 30px)' : '60px'};
+    max-width: 350px;
+    height: ${props => props.isOpen ? 'calc(100vh - 100px)' : '60px'};
+    max-height: 500px;
     bottom: 15px;
     right: 15px;
+    left: ${props => props.isOpen ? '15px' : 'auto'};
+  }
+
+  @media (max-width: 480px) {
+    width: ${props => props.isOpen ? 'calc(100vw - 20px)' : '50px'};
+    height: ${props => props.isOpen ? 'calc(100vh - 80px)' : '50px'};
+    bottom: 10px;
+    right: 10px;
+    left: ${props => props.isOpen ? '10px' : 'auto'};
   }
 `;
 

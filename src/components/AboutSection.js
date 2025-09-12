@@ -1,13 +1,21 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { MapPin, Sparkles, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 
+// Import images properly
+import eImage from '../assets/e.jpeg';
+import gromoImage from '../assets/gromo.jpeg';
+import dImage from '../assets/d.jpeg';
+import fImage from '../assets/f.jpeg';
+import gdgImage from '../assets/gdg.jpg';
+import gdg2Image from '../assets/gdg2.jpg';
+
 // --- Data for the journey cards ---
 const journeyData = [
   {
     title: "Gromo X AWS Finarva AI 2025",
     role: "CTO @Gromo",
     location: "Gurugram, Haryana",
-    image: require('../assets/e.jpeg'),
+    image: eImage,
     link: "https://gromo.com",
     ariaLabel: "Gromo X AWS Finarva AI 2025 CTO at Gromo",
     year: "2025",
@@ -17,7 +25,7 @@ const journeyData = [
     title: "Team Leadership at FinArva AI Hackathon",
     role: "Team Lead | With strong team support",
     location: "Gurugram, Haryana",
-    image: require('../assets/gromo.jpeg'),
+    image: gromoImage,
     link: "https://gromo.com",
     ariaLabel: "Team Lead at Gromo",
     year: "2025",
@@ -27,7 +35,7 @@ const journeyData = [
     title: "SDE Intern",
     role: "@Larsen & Toubro",
     location: "Faridabad, Haryana",
-    image: require('../assets/d.jpeg'),
+    image: dImage,
     link: "https://www.larsentoubro.com",
     ariaLabel: "SDE Intern at Larsen & Toubro",
     year: "2025",
@@ -37,7 +45,7 @@ const journeyData = [
     title: "#building in AI",
     role: "@SarvamAI",
     location: "Noida, Uttar Pradesh",
-    image: require('../assets/f.jpeg'),
+    image: fImage,
     link: "https://sarvam.ai",
     ariaLabel: "Building something creative in AI at SarvamAI",
     year: "2024",
@@ -47,7 +55,7 @@ const journeyData = [
     title: "Google Cloud Developers Day",
     role: "@GDG Noida",
     location: "Noida, Uttar Pradesh",
-    image: require('../assets/gdg.jpg'),
+    image: gdgImage,
     link: "https://gdg.community.dev/noida/",
     ariaLabel: "Google Cloud Developers Day 2025 at GDG Noida",
     year: "2025",
@@ -57,7 +65,7 @@ const journeyData = [
     title: "Google Cloud Developers Day",
     role: "@GDG Noida",
     location: "Noida, Uttar Pradesh",
-    image: require('../assets/gdg2.jpg'),
+    image: gdg2Image,
     link: "https://gdg.community.dev/noida/",
     ariaLabel: "Google Cloud Developers Day at GDG Noida",
     year: "2025",
