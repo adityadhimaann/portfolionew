@@ -29,7 +29,9 @@ const typing = keyframes`
 `;
 
 // Backdrop overlay for mobile
-const MobileBackdrop = styled.div`
+const MobileBackdrop = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isOpen',
+})`
   position: fixed;
   top: 0;
   left: 0;

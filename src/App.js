@@ -10,14 +10,28 @@ import { createOptimizedObserver, supportsHighPerformance } from './utils/perfor
 import './styles/mobile-enhancements.css';
 import './styles/performance-animations.css';
 
-// Lazy load below-the-fold sections
+// Lazy load below-the-fold sections with preloading
 const AboutSection = React.lazy(() => import('./components/AboutSection'));
 const ExperienceSection = React.lazy(() => import('./components/ExperienceSection'));
 const QualificationsSection = React.lazy(() => import('./components/QualificationsSection'));
 const ContactSection = React.lazy(() => import('./components/ContactSection'));
 
+// Preload components after initial render
+const preloadComponents = () => {
+  import('./components/AboutSection');
+  import('./components/ExperienceSection');
+  import('./components/QualificationsSection');
+  import('./components/ContactSection');
+};
+
 const PortfolioWebsite = () => {
-  const [isVisible, setIsVisible] = useState({});
+  const [isVisible, setIsVisible] = useState({
+    hero: true,
+    about: true,
+    experience: true,
+    qualifications: true,
+    contact: true
+  });
   const [activeSection, setActiveSection] = useState('hero');
   const [hasInitiallyLoaded, setHasInitiallyLoaded] = useState(false);
   const [isHighPerformance, setIsHighPerformance] = useState(true);
@@ -26,9 +40,12 @@ const PortfolioWebsite = () => {
   useEffect(() => {
     setIsHighPerformance(supportsHighPerformance());
     
+    // Preload lazy components immediately
+    preloadComponents();
+    
     const timer = setTimeout(() => {
       setHasInitiallyLoaded(true);
-    }, 300); // Reduced delay
+    }, 100); // Reduced delay for faster initial load
 
     return () => clearTimeout(timer);
   }, []);
@@ -74,18 +91,29 @@ const PortfolioWebsite = () => {
 
   // Setup optimized intersection observer
   useEffect(() => {
-    const observer = createOptimizedObserver(handleIntersection, {
-      threshold: 0.1,
-      rootMargin: '-50px 0px'
-    });
+    let observer = null;
+    
+    // Small delay to ensure DOM is ready and lazy components are loaded
+    const timeoutId = setTimeout(() => {
+      observer = createOptimizedObserver(handleIntersection, {
+        threshold: 0.1,
+        rootMargin: '-50px 0px'
+      });
 
-    const sections = document.querySelectorAll('section[id], div[id]');
-    sections.forEach((section) => {
-      section.classList.add('scroll-animate'); // Add initial class
-      observer.observe(section);
-    });
+      const sections = document.querySelectorAll('section[id], div[id]');
+      sections.forEach((section) => {
+        section.classList.add('scroll-animate'); // Add initial class
+        observer.observe(section);
+      });
+    }, 500); // Increased delay to ensure lazy components are loaded
 
-    return () => observer.disconnect();
+    // Cleanup function
+    return () => {
+      clearTimeout(timeoutId);
+      if (observer) {
+        observer.disconnect();
+      }
+    };
   }, [handleIntersection]);
 
   // Optimized scroll to section
@@ -121,7 +149,14 @@ const PortfolioWebsite = () => {
         <div className="relative z-10 min-h-screen">
           <Navigation activeSection={activeSection} scrollToSection={scrollToSection} />
           <HeroSection scrollToSection={scrollToSection} />
-          <Suspense fallback={<div className="text-center py-20 text-slate-400">Loading content...</div>}>
+          <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center">
+              <div className="text-center py-20">
+                <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
+                <p className="text-slate-400">Loading content...</p>
+              </div>
+            </div>
+          }>
             <AboutSection isVisible={isVisible} />
             <ExperienceSection isVisible={isVisible} />
             <QualificationsSection isVisible={isVisible} />
