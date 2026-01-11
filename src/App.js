@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo, Suspense } from 'react';
 import Navigation from './components/Navigation.jsx';
 import HeroSection from './components/HeroSection.jsx';
+import BannerSection from './components/BannerSection.jsx';
 import FloatingActionButton from './components/FloatingActionButton.jsx';
 import ContactPopup from './components/ContactPopup.jsx';
 import OptimizedBackground from './components/OptimizedBackground.jsx';
@@ -13,6 +14,7 @@ import './styles/performance-animations.css';
 // Lazy load below-the-fold sections with preloading
 const AboutSection = React.lazy(() => import('./components/AboutSection.jsx'));
 const ExperienceSection = React.lazy(() => import('./components/ExperienceSection.jsx'));
+const ProjectsSection = React.lazy(() => import('./components/ProjectsSection.jsx'));
 const QualificationsSection = React.lazy(() => import('./components/QualificationsSection.jsx'));
 const ContactSection = React.lazy(() => import('./components/ContactSection.jsx'));
 
@@ -20,6 +22,7 @@ const ContactSection = React.lazy(() => import('./components/ContactSection.jsx'
 const preloadComponents = () => {
   import('./components/AboutSection.jsx');
   import('./components/ExperienceSection.jsx');
+  import('./components/ProjectsSection.jsx');
   import('./components/QualificationsSection.jsx');
   import('./components/ContactSection.jsx');
 };
@@ -150,6 +153,7 @@ const PortfolioWebsite = () => {
         
         <Navigation activeSection={activeSection} scrollToSection={scrollToSection} />
         <HeroSection scrollToSection={scrollToSection} />
+        <BannerSection />
         <Suspense fallback={
           <div className="min-h-screen flex items-center justify-center">
             <div className="text-center py-20">
@@ -160,6 +164,7 @@ const PortfolioWebsite = () => {
         }>
           <AboutSection isVisible={isVisible} />
           <ExperienceSection isVisible={isVisible} />
+          <ProjectsSection isVisible={isVisible} />
           <QualificationsSection isVisible={isVisible} />
           <ContactSection isVisible={isVisible} />
         </Suspense>
