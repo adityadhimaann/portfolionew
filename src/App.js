@@ -1,27 +1,27 @@
 import React, { useState, useEffect, useCallback, useMemo, Suspense } from 'react';
-import Navigation from './components/Navigation';
-import HeroSection from './components/HeroSection';
-import FloatingActionButton from './components/FloatingActionButton';
-import ContactPopup from './components/ContactPopup';
-import OptimizedBackground from './components/OptimizedBackground';
-import OptimizedCursorEffect from './components/OptimizedCursorEffect';
-import EnhancedChatbot from './components/EnhancedChatbot';
+import Navigation from './components/Navigation.jsx';
+import HeroSection from './components/HeroSection.jsx';
+import FloatingActionButton from './components/FloatingActionButton.jsx';
+import ContactPopup from './components/ContactPopup.jsx';
+import OptimizedBackground from './components/OptimizedBackground.jsx';
+import OptimizedCursorEffect from './components/OptimizedCursorEffect.jsx';
+import EnhancedChatbot from './components/EnhancedChatbot.jsx';
 import { createOptimizedObserver, supportsHighPerformance } from './utils/performanceUtils';
 import './styles/mobile-enhancements.css';
 import './styles/performance-animations.css';
 
 // Lazy load below-the-fold sections with preloading
-const AboutSection = React.lazy(() => import('./components/AboutSection'));
-const ExperienceSection = React.lazy(() => import('./components/ExperienceSection'));
-const QualificationsSection = React.lazy(() => import('./components/QualificationsSection'));
-const ContactSection = React.lazy(() => import('./components/ContactSection'));
+const AboutSection = React.lazy(() => import('./components/AboutSection.jsx'));
+const ExperienceSection = React.lazy(() => import('./components/ExperienceSection.jsx'));
+const QualificationsSection = React.lazy(() => import('./components/QualificationsSection.jsx'));
+const ContactSection = React.lazy(() => import('./components/ContactSection.jsx'));
 
 // Preload components after initial render
 const preloadComponents = () => {
-  import('./components/AboutSection');
-  import('./components/ExperienceSection');
-  import('./components/QualificationsSection');
-  import('./components/ContactSection');
+  import('./components/AboutSection.jsx');
+  import('./components/ExperienceSection.jsx');
+  import('./components/QualificationsSection.jsx');
+  import('./components/ContactSection.jsx');
 };
 
 const PortfolioWebsite = () => {
@@ -135,37 +135,38 @@ const PortfolioWebsite = () => {
 
   return (
     <>
-      <div className="min-h-screen relative gpu-accelerated">
+      {/* Fixed Background Layer - Never scrolls */}
+      <div className="fixed inset-0 z-0">
+        <OptimizedBackground isHighPerformance={shouldRenderEffects} />
+      </div>
+      
+      {/* Fixed Cursor Effect */}
+      {shouldRenderEffects && <OptimizedCursorEffect />}
+      
+      {/* Scrollable Content */}
+      <div className="relative z-10 min-h-screen">
         {/* Contact Popup */}
         <ContactPopup />
         
-        {/* Optimized Background */}
-        <OptimizedBackground isHighPerformance={shouldRenderEffects} />
-        
-        {/* Optimized Cursor Effect */}
-        {shouldRenderEffects && <OptimizedCursorEffect />}
-        
-        {/* Content Layer */}
-        <div className="relative z-10 min-h-screen">
-          <Navigation activeSection={activeSection} scrollToSection={scrollToSection} />
-          <HeroSection scrollToSection={scrollToSection} />
-          <Suspense fallback={
-            <div className="min-h-screen flex items-center justify-center">
-              <div className="text-center py-20">
-                <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
-                <p className="text-slate-400">Loading content...</p>
-              </div>
+        <Navigation activeSection={activeSection} scrollToSection={scrollToSection} />
+        <HeroSection scrollToSection={scrollToSection} />
+        <Suspense fallback={
+          <div className="min-h-screen flex items-center justify-center">
+            <div className="text-center py-20">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
+              <p className="text-slate-400">Loading content...</p>
             </div>
-          }>
-            <AboutSection isVisible={isVisible} />
-            <ExperienceSection isVisible={isVisible} />
-            <QualificationsSection isVisible={isVisible} />
-            <ContactSection isVisible={isVisible} />
-          </Suspense>
-          <FloatingActionButton scrollToSection={scrollToSection} />
-        </div>
+          </div>
+        }>
+          <AboutSection isVisible={isVisible} />
+          <ExperienceSection isVisible={isVisible} />
+          <QualificationsSection isVisible={isVisible} />
+          <ContactSection isVisible={isVisible} />
+        </Suspense>
+        <FloatingActionButton scrollToSection={scrollToSection} />
       </div>
-      {/* EnhancedChatbot moved outside all other divs to ensure it stays fixed */}
+      
+      {/* EnhancedChatbot - Fixed position */}
       <EnhancedChatbot />
     </>
   );
