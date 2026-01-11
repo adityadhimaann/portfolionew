@@ -182,43 +182,59 @@ const ExperienceSection = ({ isVisible }) => {
               {typedText}<span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity`}>|</span>
             </div>
           </div>
-          <div 
-            className="overflow-x-auto scrollbar-hide py-2"
-            style={{
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-            }}
-            onMouseEnter={handleTechStackMouseEnter}
-            onMouseLeave={handleTechStackMouseLeave}
-            onTouchStart={handleTechStackMouseEnter}
-            onTouchEnd={handleTechStackMouseLeave}
-          >
+          {/* Tech Stack - Desktop: Static centered, Mobile: Auto-scroll */}
+          <div className="mb-12">
+            {/* Desktop View - Static centered badges */}
+            <div className="hidden md:flex flex-wrap justify-center gap-3">
+              {techStack.map((tech, index) => (
+                <div
+                  key={index}
+                  className={`px-4 py-2 bg-gradient-to-r ${tech.color} rounded-full text-white font-semibold text-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 whitespace-nowrap`}
+                >
+                  {tech.name}
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile View - Auto-scroll carousel */}
             <div 
-              ref={techStackScrollRef}
-              className="flex gap-3 justify-center"
-              style={{ 
-                width: 'max-content',
-                willChange: 'transform'
+              className="md:hidden overflow-x-auto scrollbar-hide py-2"
+              style={{
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
               }}
+              onMouseEnter={handleTechStackMouseEnter}
+              onMouseLeave={handleTechStackMouseLeave}
+              onTouchStart={handleTechStackMouseEnter}
+              onTouchEnd={handleTechStackMouseLeave}
             >
-              {/* First set of badges */}
-              {techStack.map((tech, index) => (
-                <div
-                  key={`first-${index}`}
-                  className={`px-4 py-2 bg-gradient-to-r ${tech.color} rounded-full text-white font-semibold text-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 whitespace-nowrap`}
-                >
-                  {tech.name}
-                </div>
-              ))}
-              {/* Duplicate set of badges for seamless loop */}
-              {techStack.map((tech, index) => (
-                <div
-                  key={`second-${index}`}
-                  className={`px-4 py-2 bg-gradient-to-r ${tech.color} rounded-full text-white font-semibold text-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 whitespace-nowrap`}
-                >
-                  {tech.name}
-                </div>
-              ))}
+              <div 
+                ref={techStackScrollRef}
+                className="flex gap-3"
+                style={{ 
+                  width: 'max-content',
+                  willChange: 'transform'
+                }}
+              >
+                {/* First set of badges */}
+                {techStack.map((tech, index) => (
+                  <div
+                    key={`first-${index}`}
+                    className={`px-4 py-2 bg-gradient-to-r ${tech.color} rounded-full text-white font-semibold text-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 whitespace-nowrap`}
+                  >
+                    {tech.name}
+                  </div>
+                ))}
+                {/* Duplicate set of badges for seamless loop */}
+                {techStack.map((tech, index) => (
+                  <div
+                    key={`second-${index}`}
+                    className={`px-4 py-2 bg-gradient-to-r ${tech.color} rounded-full text-white font-semibold text-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 whitespace-nowrap`}
+                  >
+                    {tech.name}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           <style>
