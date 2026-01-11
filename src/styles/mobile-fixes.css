@@ -1,0 +1,36 @@
+/* Critical Mobile Rendering Fixes */
+
+/* Mobile-specific rendering fixes */
+@media (max-width: 768px) {
+  /* Prevent white screen on mobile */
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Ensure sections are visible */
+  section[id] {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  /* Prevent layout shifts */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Fix for iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  body {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Prevent content from being hidden behind fixed elements */
+.fixed-background {
+  pointer-events: none;
+}
+
+.scrollable-content {
+  pointer-events: auto;
+}

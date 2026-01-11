@@ -10,6 +10,7 @@ import EnhancedChatbot from './components/EnhancedChatbot.jsx';
 import { createOptimizedObserver, supportsHighPerformance } from './utils/performanceUtils';
 import './styles/mobile-enhancements.css';
 import './styles/performance-animations.css';
+import './styles/mobile-fixes.css';
 
 // Lazy load below-the-fold sections with preloading
 const AboutSection = React.lazy(() => import('./components/AboutSection.jsx'));
@@ -64,14 +65,12 @@ const PortfolioWebsite = () => {
       
       // Optimized animation trigger
       if (entry.isIntersecting && hasInitiallyLoaded && entry.target.id !== 'hero') {
-        entry.target.classList.add('scroll-animate', 'in-view');
-        
         // Staggered animations for child elements
         const animatableElements = entry.target.querySelectorAll('.scroll-animate');
         animatableElements.forEach((el, index) => {
           setTimeout(() => {
             el.classList.add('in-view');
-          }, index * 100); // Reduced stagger time
+          }, index * 100);
         });
       }
 
@@ -105,10 +104,9 @@ const PortfolioWebsite = () => {
 
       const sections = document.querySelectorAll('section[id], div[id]');
       sections.forEach((section) => {
-        section.classList.add('scroll-animate'); // Add initial class
         observer.observe(section);
       });
-    }, 500); // Increased delay to ensure lazy components are loaded
+    }, 500);
 
     // Cleanup function
     return () => {
