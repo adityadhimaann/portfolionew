@@ -1,0 +1,127 @@
+import { lazy, Suspense, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { FlipFadeText } from "@/components/ui/flip-fade-text";
+import { LightLines } from "@/components/ui/light-lines";
+
+const HeroScene = lazy(() => import("./HeroScene"));
+
+const Hero = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  const name = "Aditya Kumar";
+  const title = "Full Stack Developer";
+
+  return (
+    <section ref={ref} className="relative flex min-h-screen items-center justify-center overflow-hidden">
+      {/* Animated amber light lines background */}
+      <div className="absolute inset-0 z-0">
+        <LightLines lineCount={6} speed={0.8} />
+      </div>
+
+      {/* 3D Particle Background */}
+      <Suspense fallback={null}>
+        <HeroScene />
+      </Suspense>
+
+      {/* Gradient orbs */}
+      <motion.div
+        style={{ y }}
+        className="pointer-events-none absolute -top-40 left-1/4 h-[500px] w-[500px] rounded-full bg-primary/10 blur-[120px] animate-pulse-glow"
+      />
+      <motion.div
+        style={{ y }}
+        className="pointer-events-none absolute -bottom-40 right-1/4 h-[400px] w-[400px] rounded-full bg-primary/5 blur-[100px] animate-pulse-glow animation-delay-200"
+      />
+
+      <motion.div style={{ opacity }} className="container relative z-10 px-6 text-center lg:px-12">
+        
+
+        <h1 className="text-fluid-xl font-display font-extrabold tracking-tight">
+          <FlipFadeText
+            words={["Aditya Kumar"]}
+            interval={4000}
+            className="min-h-0"
+            textClassName="text-fluid-xl font-display font-extrabold tracking-tight text-foreground"
+            letterDuration={0.6}
+            staggerDelay={0.08}
+            exitStaggerDelay={0.04}
+          />
+        </h1>
+
+        <div className="mt-4 overflow-hidden">
+          <motion.h2
+            initial={{ y: 80 }}
+            animate={{ y: 0 }}
+            transition={{ delay: 1.4, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="text-fluid-md font-display font-medium text-muted-foreground"
+          >
+            {title}
+          </motion.h2>
+        </div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.8, duration: 0.8 }}
+          className="mx-auto mt-8 max-w-lg text-base leading-relaxed text-muted-foreground"
+        >
+          Building scalable, user-centric web applications with modern technologies, GenAI integration, and clean architecture.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2.2, duration: 0.6 }}
+          className="mt-10 flex items-center justify-center gap-4"
+        >
+          <motion.a
+            href="#projects"
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground shadow-lg"
+          >
+            View Work
+          </motion.a>
+          <motion.a
+            href="#about"
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground"
+          >
+            About Me
+          </motion.a>
+        </motion.div>
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2.8 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+          className="flex flex-col items-center gap-2"
+        >
+          <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Scroll</span>
+          <div className="h-10 w-px bg-gradient-to-b from-muted-foreground/50 to-transparent" />
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+};
+
+export default Hero;
