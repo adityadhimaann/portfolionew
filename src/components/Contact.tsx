@@ -5,7 +5,6 @@ import { Send, Mail, MapPin, Copy, Check } from "lucide-react";
 import { LiquidOcean } from "@/components/ui/liquid-ocean";
 import AnimatedButton from "@/components/ui/animated-button";
 import emailjs from '@emailjs/browser';
-import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
@@ -13,7 +12,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [focused, setFocused] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const email = "dhimanaditya56@gmail.com";
 
@@ -26,24 +25,20 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus('idle');
 
     try {
       // EmailJS configuration
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_portfolio';
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_portfolio';
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || '';
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
       const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
 
-      if (!publicKey) {
+      if (!publicKey || !serviceId || !templateId) {
         // Fallback to mailto if EmailJS is not configured
         const mailtoLink = `mailto:${email}?subject=Portfolio Contact from ${formData.name}&body=${encodeURIComponent(
           `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
         )}`;
         window.location.href = mailtoLink;
-        
-        toast({
-          title: "Opening email client",
-          description: "Your default email client will open with the message.",
-        });
         
         setFormData({ name: "", email: "", message: "" });
         setIsSubmitting(false);
@@ -63,12 +58,11 @@ const Contact = () => {
         publicKey
       );
 
-      toast({
-        title: "Message sent successfully!",
-        description: "Thank you for reaching out. I'll get back to you soon.",
-      });
-
+      setSubmitStatus('success');
       setFormData({ name: "", email: "", message: "" });
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
     } catch (error) {
       console.error('Email send error:', error);
       
@@ -78,10 +72,7 @@ const Contact = () => {
       )}`;
       window.location.href = mailtoLink;
       
-      toast({
-        title: "Opening email client",
-        description: "Your default email client will open with the message.",
-      });
+      setFormData({ name: "", email: "", message: "" });
     } finally {
       setIsSubmitting(false);
     }
@@ -175,6 +166,19 @@ const Contact = () => {
             >
               <Send size={16} /> {isSubmitting ? "Sending..." : "Send Message"}
             </motion.button>
+
+            {/* Success Message */}
+            {submitStatus === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="rounded-lg bg-green-500/10 border border-green-500/20 p-3 text-center"
+              >
+                <p className="text-sm text-green-400 font-medium">
+                  ✓ Message sent successfully! I'll get back to you soon.
+                </p>
+              </motion.div>
+            )}
           </motion.form>
 
           {/* Info */}
