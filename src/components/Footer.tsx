@@ -18,7 +18,6 @@ const Footer = () => {
           {[
             { label: "GitHub", url: "https://github.com/adityadhimaann" },
             { label: "LinkedIn", url: "https://www.linkedin.com/in/adityadhimaann" },
-            { label: "Portfolio", url: "https://www.adidev.works" },
           ].map((link) => (
             <a
               key={link.label}

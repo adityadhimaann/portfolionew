@@ -4,12 +4,16 @@ import { useInView } from "react-intersection-observer";
 import { Send, Mail, MapPin, Copy, Check } from "lucide-react";
 import { LiquidOcean } from "@/components/ui/liquid-ocean";
 import AnimatedButton from "@/components/ui/animated-button";
+import emailjs from '@emailjs/browser';
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
   const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [focused, setFocused] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
   const email = "dhimanaditya56@gmail.com";
 
@@ -19,11 +23,68 @@ const Contact = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Placeholder — integrate with backend
-    alert("Message sent! (This is a demo)");
-    setFormData({ name: "", email: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      // EmailJS configuration
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_portfolio';
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_portfolio';
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
+
+      if (!publicKey) {
+        // Fallback to mailto if EmailJS is not configured
+        const mailtoLink = `mailto:${email}?subject=Portfolio Contact from ${formData.name}&body=${encodeURIComponent(
+          `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+        )}`;
+        window.location.href = mailtoLink;
+        
+        toast({
+          title: "Opening email client",
+          description: "Your default email client will open with the message.",
+        });
+        
+        setFormData({ name: "", email: "", message: "" });
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Send email using EmailJS
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_email: email,
+        },
+        publicKey
+      );
+
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+      });
+
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error('Email send error:', error);
+      
+      // Fallback to mailto on error
+      const mailtoLink = `mailto:${email}?subject=Portfolio Contact from ${formData.name}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )}`;
+      window.location.href = mailtoLink;
+      
+      toast({
+        title: "Opening email client",
+        description: "Your default email client will open with the message.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -107,11 +168,12 @@ const Contact = () => {
 
             <motion.button
               type="submit"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3.5 text-sm font-semibold text-primary-foreground"
+              disabled={isSubmitting}
+              whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+              whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <Send size={16} /> Send Message
+              <Send size={16} /> {isSubmitting ? "Sending..." : "Send Message"}
             </motion.button>
           </motion.form>
 
@@ -150,7 +212,7 @@ const Contact = () => {
               {[
                 { label: "GitHub", url: "https://github.com/adityadhimaann" },
                 { label: "LinkedIn", url: "https://www.linkedin.com/in/adityadhimaann" },
-                { label: "Portfolio", url: "https://www.adidev.works" },
+                
               ].map((social) => (
                 <AnimatedButton
                   key={social.label}
