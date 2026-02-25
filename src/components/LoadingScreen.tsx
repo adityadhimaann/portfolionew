@@ -32,7 +32,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
           animate={{ opacity: 1, y: 0 }}
           className="font-display text-5xl font-extrabold gradient-text"
         >
-          JD
+          AK
         </motion.span>
 
         <div className="mt-8 h-px w-48 overflow-hidden rounded-full bg-border">

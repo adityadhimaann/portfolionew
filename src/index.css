@@ -138,8 +138,9 @@
 
   /* Fluid typography */
   .text-fluid-xl {
-    font-size: clamp(2.5rem, 6vw, 6rem);
-    line-height: 1.05;
+    font-size: clamp(1.75rem, 10vw, 6rem);
+    line-height: 1.1;
+    word-break: break-word;
   }
 
   .text-fluid-lg {

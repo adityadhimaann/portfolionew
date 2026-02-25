@@ -14,17 +14,11 @@ const navItems: NavItem[] = [
 ];
 
 const Navigation = () => {
-  const [isVisible, setIsVisible] = useState(true);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentY = window.scrollY;
-      setIsVisible(currentY < lastScrollY || currentY < 100);
-      setLastScrollY(currentY);
-
       const sections = navItems.map((item) => item.href.slice(1));
       for (const id of [...sections].reverse()) {
         const el = document.getElementById(id);
@@ -36,7 +30,7 @@ const Navigation = () => {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   const scrollTo = (href: string) => {
     setIsMobileOpen(false);
@@ -56,7 +50,7 @@ const Navigation = () => {
     <>
       <motion.header
         initial={{ y: -100 }}
-        animate={{ y: isVisible ? 0 : -100 }}
+        animate={{ y: 0 }}
         transition={{ duration: 0.3 }}
         className="fixed top-0 left-0 right-0 z-50"
       >

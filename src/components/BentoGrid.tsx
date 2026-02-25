@@ -183,8 +183,8 @@ function StatCounter({ value, label, suffix = "" }: { value: number; label: stri
 
   return (
     <div ref={ref} className="text-center">
-      <p className="text-3xl font-display font-bold gradient-text">{count}{suffix}</p>
-      <p className="text-xs text-muted-foreground mt-1">{label}</p>
+      <p className="text-2xl sm:text-3xl font-display font-bold gradient-text">{count}{suffix}</p>
+      <p className="text-[10px] sm:text-xs text-muted-foreground mt-1">{label}</p>
     </div>
   );
 }
@@ -242,7 +242,7 @@ export default function BentoGrid() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4 auto-rows-[180px]">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 auto-rows-[160px] sm:auto-rows-[180px]">
 
           {/* Live Clock — tall left */}
           <BentoCard i={0} className="glass-card col-span-1 row-span-2 flex flex-col items-center justify-center p-5 hover:border-primary/50 transition-colors">
@@ -270,14 +270,16 @@ export default function BentoGrid() {
           </BentoCard>
 
           {/* Stats row */}
-          <BentoCard i={2} className="glass-card col-span-2 flex items-center justify-around p-5">
+          <BentoCard i={2} className="glass-card col-span-2 flex items-center justify-around p-3 sm:p-5 gap-2">
             <StatCounter value={2} label="Years Exp." suffix="+" />
-            <div className="h-10 w-px bg-border" />
+            <div className="h-8 sm:h-10 w-px bg-border" />
             <StatCounter value={15} label="Projects" suffix="+" />
-            <div className="h-10 w-px bg-border" />
+            <div className="h-8 sm:h-10 w-px bg-border" />
             <StatCounter value={5} label="Certifications" suffix="+" />
-            <div className="h-10 w-px bg-border" />
-            <StatCounter value={15} label="Top in 25K" suffix="" />
+            <div className="hidden sm:block h-10 w-px bg-border" />
+            <div className="hidden sm:block">
+              <StatCounter value={15} label="Top in 25K" suffix="" />
+            </div>
           </BentoCard>
 
           {/* Code snippet */}
@@ -307,19 +309,19 @@ export default function BentoGrid() {
           </BentoCard>
 
           {/* Tech Stack */}
-          <BentoCard i={5} className="glass-card col-span-1 row-span-1 flex flex-col p-4">
-            <div className="mb-3 flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          <BentoCard i={5} className="glass-card col-span-1 row-span-1 flex flex-col p-3 sm:p-4">
+            <div className="mb-2 sm:mb-3 flex items-center gap-1.5 text-[10px] sm:text-xs font-medium uppercase tracking-wider text-muted-foreground">
               <Layers size={11} /> Stack
             </div>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-1 sm:gap-1.5">
               {TECH_STACK.slice(0, 6).map((t) => (
                 <motion.div
                   key={t.name}
                   whileHover={{ scale: 1.15, y: -2 }}
-                  className="flex items-center gap-1 rounded-lg border border-border bg-muted px-2 py-1 text-xs text-muted-foreground hover:border-primary/50 hover:text-foreground transition-colors cursor-default"
+                  className="flex items-center gap-0.5 sm:gap-1 rounded-md sm:rounded-lg border border-border bg-muted px-1.5 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs text-muted-foreground hover:border-primary/50 hover:text-foreground transition-colors cursor-default"
                 >
-                  <span>{t.icon}</span>
-                  <span>{t.name}</span>
+                  <span className="text-sm sm:text-base">{t.icon}</span>
+                  <span className="hidden sm:inline">{t.name}</span>
                 </motion.div>
               ))}
             </div>

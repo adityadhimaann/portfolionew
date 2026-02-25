@@ -56,7 +56,7 @@ const Letter = memo(function Letter({
       }}
       className="inline-block"
     >
-      {char}
+      {char === " " ? "\u00A0" : char}
     </motion.span>
   )
 })
@@ -79,7 +79,7 @@ const Word = memo(function Word({
   return (
     <motion.div
       className={cn(
-        "flex gap-[0.1em] text-4xl md:text-6xl font-bold uppercase tracking-wider text-neutral-800 dark:text-neutral-100",
+        "flex gap-0 whitespace-nowrap justify-center text-4xl md:text-6xl font-bold uppercase tracking-wider text-neutral-800 dark:text-neutral-100",
         textClassName
       )}
       initial="initial"
@@ -135,8 +135,8 @@ export function FlipFadeText({
   const currentWord = useMemo(() => words[index], [words, index])
 
   return (
-    <div className={cn("flex items-center justify-center min-h-[200px]", className)}>
-      <div className="relative flex items-center justify-center" style={{ perspective: "1000px" }}>
+    <div className={cn("flex items-center justify-center w-full", className)}>
+      <div className="relative flex items-center justify-center w-full max-w-full overflow-visible" style={{ perspective: "1000px" }}>
         <AnimatePresence mode="wait">
           <Word
             key={currentWord}

@@ -12,7 +12,6 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import LoadingScreen from "@/components/LoadingScreen";
 import BentoGrid from "@/components/BentoGrid";
-import AIChat from "@/components/AIChat";
 import useLenis from "@/hooks/useLenis";
 
 const Index = () => {
@@ -41,9 +40,6 @@ const Index = () => {
         </main>
         <Footer />
       </div>
-
-      {/* AI Chat — global floating */}
-      <AIChat />
     </>
   );
 };

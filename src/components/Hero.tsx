@@ -38,13 +38,26 @@ const Hero = () => {
 
       <motion.div style={{ opacity }} className="container relative z-10 px-6 text-center lg:px-12">
         
+        {/* Profile Picture - Mobile Only */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-8 flex justify-center lg:hidden"
+        >
+          <img
+            src="/a.jpg"
+            alt="Aditya Kumar"
+            className="h-56 w-56 rounded-full object-cover shadow-2xl sm:h-64 sm:w-64"
+          />
+        </motion.div>
 
-        <h1 className="text-fluid-xl font-display font-extrabold tracking-tight">
+        <h1 className="text-fluid-xl font-display font-extrabold tracking-tight w-full max-w-full overflow-visible px-2">
           <FlipFadeText
             words={["Aditya Kumar"]}
             interval={4000}
-            className="min-h-0"
-            textClassName="text-fluid-xl font-display font-extrabold tracking-tight text-foreground"
+            className="min-h-0 w-full"
+            textClassName="text-fluid-xl font-display font-extrabold tracking-tight text-foreground !text-2xl xs:!text-3xl sm:!text-4xl md:!text-5xl lg:!text-6xl xl:!text-7xl"
             letterDuration={0.6}
             staggerDelay={0.08}
             exitStaggerDelay={0.04}
