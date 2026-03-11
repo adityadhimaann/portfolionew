@@ -14,6 +14,7 @@ interface Project {
   github?: string;
   category: string;
   featured?: boolean;
+  video?: string;
 }
 
 const projects: Project[] = [
@@ -82,6 +83,15 @@ const projects: Project[] = [
 const Projects = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [headerRef, headerInView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile
+  useState(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  });
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -90,6 +100,35 @@ const Projects = () => {
 
   const x = useTransform(scrollYProgress, [0, 1], ["0%", `-${(projects.length - 2) * 33}%`]);
 
+  // Mobile: simple horizontal scroll layout
+  if (isMobile) {
+    return (
+      <section id="projects" className="relative py-24">
+        <div className="container px-6" ref={headerRef}>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={headerInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7 }}
+          >
+            <p className="mb-2 text-sm font-medium uppercase tracking-[0.3em] text-primary">Work</p>
+            <h2 className="text-fluid-lg font-display font-bold tracking-tight text-foreground">
+              Selected <ScrambleText text="Projects" className="gradient-text" />
+            </h2>
+          </motion.div>
+        </div>
+
+        <div className="mt-10 flex gap-5 overflow-x-auto px-6 pb-4 snap-x snap-mandatory no-scrollbar" style={{ WebkitOverflowScrolling: "touch" }}>
+          {projects.map((project) => (
+            <div key={project.title} className="snap-start flex-shrink-0">
+              <ProjectCard project={project} />
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  // Desktop: sticky scroll-jacking
   return (
     <section id="projects" ref={containerRef} className="relative" style={{ height: `${projects.length * 100}vh` }}>
       <div className="sticky top-0 flex h-screen flex-col overflow-hidden">

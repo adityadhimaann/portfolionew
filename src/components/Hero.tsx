@@ -37,19 +37,21 @@ const Hero = () => {
       />
 
       <motion.div style={{ opacity }} className="container relative z-10 px-6 text-center lg:px-12">
-        
-        {/* Profile Picture - Mobile Only */}
+        {/* Profile image – all screens */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-8 flex justify-center lg:hidden"
+          transition={{ delay: 0.6, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-8 flex items-center justify-center"
         >
-          <img
-            src="/a.jpg"
-            alt="Aditya Kumar"
-            className="h-56 w-56 rounded-full object-cover shadow-2xl sm:h-64 sm:w-64"
-          />
+          <div className="relative">
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-primary/60 via-primary/20 to-transparent blur-md" />
+            <img
+              src="/adidevworks.jpeg"
+              alt="Aditya Kumar"
+              className="relative h-72 w-72 rounded-full object-cover border-2 border-primary/30 shadow-xl"
+            />
+          </div>
         </motion.div>
 
         <h1 className="text-fluid-xl font-display font-extrabold tracking-tight w-full max-w-full overflow-visible px-2">
@@ -113,6 +115,16 @@ const Hero = () => {
             className="rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground"
           >
             About Me
+          </motion.a>
+          <motion.a
+            href="/AdityaCV_SDE.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="rounded-full border border-primary/50 bg-primary/10 px-7 py-3 text-sm font-semibold text-primary shadow-lg"
+          >
+            View Resume
           </motion.a>
         </motion.div>
       </motion.div>

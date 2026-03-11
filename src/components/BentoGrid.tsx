@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import {
-  Clock, Code2, GitBranch, Layers, Zap, MapPin, Mail, ExternalLink, Star,
+  GitBranch, Layers, Zap, MapPin, Mail, ExternalLink, Star,
 } from "lucide-react";
 import { SiTypescript, SiExpress, SiMongodb, SiReact, SiNodedotjs } from "react-icons/si";
 
@@ -25,117 +25,7 @@ const TECH_STACK = [
   { name: "Docker", icon: <i className="fa-brands fa-docker" style={{ color: "rgb(26, 46, 194)" }}></i> },
 ];
 
-const CODE_LINES = [
-  { text: "const developer = {", indent: 0, color: "text-foreground" },
-  { text: '  name: "Aditya Kumar",', indent: 0, color: "text-green-400" },
-  { text: '  role: "Full Stack Dev",', indent: 0, color: "text-green-400" },
-  { text: "  passion: Infinity,", indent: 0, color: "text-amber-400" },
-  { text: "  available: true,", indent: 0, color: "text-blue-400" },
-  { text: "};", indent: 0, color: "text-foreground" },
-];
 
-function LiveClock() {
-  const [time, setTime] = useState(new Date());
-  useEffect(() => {
-    const t = setInterval(() => setTime(new Date()), 1000);
-    return () => clearInterval(t);
-  }, []);
-
-  const h = time.getHours() % 12;
-  const m = time.getMinutes();
-  const s = time.getSeconds();
-  const hDeg = (h / 12) * 360 + (m / 60) * 30;
-  const mDeg = (m / 60) * 360 + (s / 60) * 6;
-  const sDeg = (s / 60) * 360;
-
-  return (
-    <div className="flex flex-col items-center gap-4">
-      <div className="relative h-28 w-28">
-        <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90">
-          <circle cx="50" cy="50" r="44" fill="none" stroke="hsl(var(--border))" strokeWidth="2" />
-          <circle cx="50" cy="50" r="44" fill="none" stroke="hsl(var(--primary))"
-            strokeWidth="2" strokeDasharray="3 10" opacity="0.4" />
-          {[...Array(12)].map((_, i) => {
-            const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
-            return (
-              <circle key={i} cx={50 + 40 * Math.cos(angle)} cy={50 + 40 * Math.sin(angle)}
-                r="1.5" fill="hsl(var(--muted-foreground))" />
-            );
-          })}
-          {/* Hour hand */}
-          <line x1="50" y1="50" x2="50" y2="22"
-            stroke="hsl(var(--foreground))" strokeWidth="3" strokeLinecap="round"
-            style={{ transformOrigin: "50px 50px", transform: `rotate(${hDeg}deg)` }} />
-          {/* Minute hand */}
-          <line x1="50" y1="50" x2="50" y2="16"
-            stroke="hsl(var(--foreground))" strokeWidth="2" strokeLinecap="round"
-            style={{ transformOrigin: "50px 50px", transform: `rotate(${mDeg}deg)` }} />
-          {/* Second hand */}
-          <line x1="50" y1="55" x2="50" y2="12"
-            stroke="hsl(var(--primary))" strokeWidth="1.5" strokeLinecap="round"
-            style={{ transformOrigin: "50px 50px", transform: `rotate(${sDeg}deg)`, transition: "transform 0.1s" }} />
-          <circle cx="50" cy="50" r="2.5" fill="hsl(var(--primary))" />
-        </svg>
-      </div>
-      <div className="text-center">
-        <p className="font-mono text-2xl font-bold text-foreground">
-          {time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
-        </p>
-        <p className="text-xs text-muted-foreground mt-1">Punjab, India</p>
-        <p className="text-xs text-muted-foreground">
-          {time.toLocaleDateString([], { weekday: "long", month: "short", day: "numeric" })}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function TypingCode() {
-  const [lineIdx, setLineIdx] = useState(0);
-  const [charIdx, setCharIdx] = useState(0);
-  const [visible, setVisible] = useState<string[]>([]);
-  const [blink, setBlink] = useState(true);
-
-  useEffect(() => {
-    const blinkTimer = setInterval(() => setBlink((b) => !b), 500);
-    return () => clearInterval(blinkTimer);
-  }, []);
-
-  useEffect(() => {
-    if (lineIdx >= CODE_LINES.length) {
-      const reset = setTimeout(() => {
-        setLineIdx(0); setCharIdx(0); setVisible([]);
-      }, 2500);
-      return () => clearTimeout(reset);
-    }
-    const line = CODE_LINES[lineIdx].text;
-    if (charIdx < line.length) {
-      const t = setTimeout(() => {
-        setCharIdx((c) => c + 1);
-        setVisible((v) => {
-          const updated = [...v];
-          updated[lineIdx] = line.slice(0, charIdx + 1);
-          return updated;
-        });
-      }, 40 + Math.random() * 40);
-      return () => clearTimeout(t);
-    } else {
-      const t = setTimeout(() => { setLineIdx((l) => l + 1); setCharIdx(0); }, 180);
-      return () => clearTimeout(t);
-    }
-  }, [lineIdx, charIdx]);
-
-  return (
-    <div className="font-mono text-xs leading-relaxed space-y-0.5">
-      {CODE_LINES.map((line, i) => (
-        <div key={i} className={`${line.color} ${i > lineIdx ? "opacity-0" : ""}`}>
-          {visible[i] ?? ""}
-          {i === lineIdx && <span className={`inline-block w-0.5 h-3.5 bg-primary ml-px align-middle ${blink ? "opacity-100" : "opacity-0"}`} />}
-        </div>
-      ))}
-    </div>
-  );
-}
 
 function SkillsRadar() {
   const ref = useRef(null);
@@ -244,13 +134,7 @@ export default function BentoGrid() {
 
         <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 auto-rows-[160px] sm:auto-rows-[180px]">
 
-          {/* Live Clock — tall left */}
-          <BentoCard i={0} className="glass-card col-span-1 row-span-2 flex flex-col items-center justify-center p-5 hover:border-primary/50 transition-colors">
-            <div className="mb-3 flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              <Clock size={12} /> Live Clock
-            </div>
-            <LiveClock />
-          </BentoCard>
+
 
           {/* Availability */}
           <BentoCard i={1} className="glass-card col-span-1 flex flex-col justify-between p-5 hover:border-primary/50 transition-colors">
@@ -282,23 +166,7 @@ export default function BentoGrid() {
             </div>
           </BentoCard>
 
-          {/* Code snippet */}
-          <BentoCard i={3} className="glass-card col-span-2 row-span-2 flex flex-col p-5">
-            <div className="mb-3 flex items-center gap-2">
-              <div className="flex gap-1.5">
-                {["#ff5f56", "#ffbd2e", "#27c93f"].map((c) => (
-                  <div key={c} className="h-2.5 w-2.5 rounded-full" style={{ background: c }} />
-                ))}
-              </div>
-              <span className="text-xs text-muted-foreground font-mono ml-2">portfolio.ts</span>
-            </div>
-            <div className="flex-1 overflow-hidden bg-muted/50 rounded-lg p-3">
-              <TypingCode />
-            </div>
-            <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
-              <Code2 size={11} /> TypeScript
-            </div>
-          </BentoCard>
+
 
           {/* Skills */}
           <BentoCard i={4} className="glass-card col-span-2 row-span-2 flex flex-col p-5">
