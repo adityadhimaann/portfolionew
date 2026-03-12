@@ -212,3 +212,12 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Amber borders for At a Glance bento cards */
+#bento .glass-card {
+  border-color: hsla(38, 80%, 50%, 0.983);
+}
+#bento .glass-card:hover {
+  border-color: hsla(38, 72%, 47%, 0.892);
+}
+

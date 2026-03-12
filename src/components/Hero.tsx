@@ -90,7 +90,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.2, duration: 0.6 }}
-          className="mt-10 flex items-center justify-center gap-4"
+          className="mt-10 flex items-center justify-center gap-2 md:gap-4"
         >
           <motion.a
             href="#projects"
@@ -100,7 +100,7 @@ const Hero = () => {
             }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground shadow-lg"
+            className="rounded-full bg-primary px-4 py-2 text-xs md:px-7 md:py-3 md:text-sm font-semibold text-primary-foreground shadow-lg whitespace-nowrap"
           >
             View Work
           </motion.a>
@@ -112,7 +112,7 @@ const Hero = () => {
             }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground"
+            className="rounded-full border border-border px-4 py-2 text-xs md:px-7 md:py-3 md:text-sm font-semibold text-foreground whitespace-nowrap"
           >
             About Me
           </motion.a>
@@ -122,27 +122,10 @@ const Hero = () => {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="rounded-full border border-primary/50 bg-primary/10 px-7 py-3 text-sm font-semibold text-primary shadow-lg"
+            className="rounded-full border border-primary/50 bg-primary/10 px-4 py-2 text-xs md:px-7 md:py-3 md:text-sm font-semibold text-primary shadow-lg whitespace-nowrap"
           >
             View Resume
           </motion.a>
-        </motion.div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.8 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2"
-        >
-          <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Scroll</span>
-          <div className="h-10 w-px bg-gradient-to-b from-muted-foreground/50 to-transparent" />
         </motion.div>
       </motion.div>
     </section>

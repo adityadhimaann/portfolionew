@@ -124,7 +124,7 @@ export default function BentoGrid() {
           <img
             src={"/adiXdevbanner.png"}
             alt="Aditya X Dev Banner"
-            className="mx-auto my-4 w-[100%] h-[100%] rounded-lg shadow-lg"
+            className="mx-auto my-4 w-[100%] h-[100%] rounded-lg shadow-lg border-2 border-amber-600/100"
             
           />
           <p className="mx-auto mt-4 max-w-md text-muted-foreground">
@@ -163,6 +163,24 @@ export default function BentoGrid() {
             <div className="hidden sm:block h-10 w-px bg-border" />
             <div className="hidden sm:block">
               <StatCounter value={15} label="Top in 25K" suffix="" />
+            </div>
+          </BentoCard>
+
+          {/* Star rating */}
+          <BentoCard i={9} className="glass-card col-span-1 flex flex-col justify-between p-5">
+            <div className="flex gap-0.5">
+              {Array.from({ length: 5 }).map((_, idx) => (
+                <motion.div key={idx} initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.1 * idx + 0.5 }}>
+                  <Star size={14} className="text-primary fill-primary" />
+                </motion.div>
+              ))}
+            </div>
+            <div>
+              <p className="text-2xl font-display font-bold text-foreground">5.0</p>
+              <p className="text-xs text-muted-foreground">OCI Certified Developer</p>
+              <p className="text-xs text-muted-foreground">Top 15 in Gromo-AWS</p>
             </div>
           </BentoCard>
 
@@ -251,23 +269,7 @@ export default function BentoGrid() {
             <p className="text-xs text-muted-foreground">500+ contributions this year</p>
           </BentoCard>
 
-          {/* Star rating */}
-          <BentoCard i={9} className="glass-card col-span-1 flex flex-col justify-between p-5">
-            <div className="flex gap-0.5">
-              {Array.from({ length: 5 }).map((_, idx) => (
-                <motion.div key={idx} initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.1 * idx + 0.5 }}>
-                  <Star size={14} className="text-primary fill-primary" />
-                </motion.div>
-              ))}
-            </div>
-            <div>
-              <p className="text-2xl font-display font-bold text-foreground">5.0</p>
-              <p className="text-xs text-muted-foreground">OCI Certified Developer</p>
-              <p className="text-xs text-muted-foreground">Top 15 in Gromo-AWS</p>
-            </div>
-          </BentoCard>
+
 
         </div>
       </div>

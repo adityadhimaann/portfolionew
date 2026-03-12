@@ -34,7 +34,7 @@ const activities: Activity[] = [
     title: "SDE Intern",
     subtitle: "@Larsen & Toubro",
     location: "Faridabad, Haryana",
-    images: ["/d.jpeg", "/c.jpg", "/b.jpg", "/a.jpg"],
+    images: ["/d.jpeg", "/b.jpg", "/a.jpg"],
     link: "#",
   },
   {
@@ -44,7 +44,7 @@ const activities: Activity[] = [
     title: "#building in AI",
     subtitle: "@SarvamAI",
     location: "Noida, Uttar Pradesh",
-    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop",
+    image: "/c.jpg",
     link: "#",
   },
   {
@@ -67,16 +67,7 @@ const activities: Activity[] = [
     images: ["/gromo.jpeg", "/b.png"],
     link: "#",
   },
-  {
-    id: 6,
-    year: "2025",
-    category: "certification",
-    title: "Oracle Cloud Infrastructure Certified",
-    subtitle: "OCI 2024 Generative AI Professional",
-    location: "Online",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop",
-    link: "#",
-  },
+  
   {
     id: 7,
     year: "2024",
