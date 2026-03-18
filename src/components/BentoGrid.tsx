@@ -153,20 +153,7 @@ export default function BentoGrid() {
             <p className="text-xs font-medium text-primary">Q1 2026 · Remote OK</p>
           </BentoCard>
 
-          {/* Stats row */}
-          <BentoCard i={2} className="glass-card col-span-2 flex items-center justify-around p-3 sm:p-5 gap-2">
-            <StatCounter value={2} label="Years Exp." suffix="+" />
-            <div className="h-8 sm:h-10 w-px bg-border" />
-            <StatCounter value={15} label="Projects" suffix="+" />
-            <div className="h-8 sm:h-10 w-px bg-border" />
-            <StatCounter value={5} label="Certifications" suffix="+" />
-            <div className="hidden sm:block h-10 w-px bg-border" />
-            <div className="hidden sm:block">
-              <StatCounter value={15} label="Top in 25K" suffix="" />
-            </div>
-          </BentoCard>
-
-          {/* Star rating */}
+          {/* Star rating — placed after Availability so they pair on mobile's 2-col grid */}
           <BentoCard i={9} className="glass-card col-span-1 flex flex-col justify-between p-5">
             <div className="flex gap-0.5">
               {Array.from({ length: 5 }).map((_, idx) => (
@@ -181,6 +168,19 @@ export default function BentoGrid() {
               <p className="text-2xl font-display font-bold text-foreground">5.0</p>
               <p className="text-xs text-muted-foreground">OCI Certified Developer</p>
               <p className="text-xs text-muted-foreground">Top 15 in Gromo-AWS</p>
+            </div>
+          </BentoCard>
+
+          {/* Stats row */}
+          <BentoCard i={2} className="glass-card col-span-2 flex items-center justify-around p-3 sm:p-5 gap-2">
+            <StatCounter value={2} label="Years Exp." suffix="+" />
+            <div className="h-8 sm:h-10 w-px bg-border" />
+            <StatCounter value={15} label="Projects" suffix="+" />
+            <div className="h-8 sm:h-10 w-px bg-border" />
+            <StatCounter value={5} label="Certifications" suffix="+" />
+            <div className="hidden sm:block h-10 w-px bg-border" />
+            <div className="hidden sm:block">
+              <StatCounter value={15} label="Top in 25K" suffix="" />
             </div>
           </BentoCard>
 
@@ -214,7 +214,7 @@ export default function BentoGrid() {
           </BentoCard>
 
           {/* Contact CTA */}
-          <BentoCard i={6} className="glass-card col-span-1 flex flex-col justify-between p-5 group cursor-pointer hover:border-primary/60 transition-all"
+          <BentoCard i={6} className="glass-card col-span-1 flex flex-col justify-between p-5 group cursor-pointer hover:border-primary/60 transition-all overflow-hidden"
             onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
             hoverScale={true}>
             <div className="flex items-center justify-between">
@@ -223,9 +223,9 @@ export default function BentoGrid() {
                 <ExternalLink size={12} className="text-muted-foreground" />
               </motion.div>
             </div>
-            <div>
+            <div className="min-w-0">
               <p className="text-sm font-display font-bold text-foreground">Let's Talk</p>
-              <p className="text-xs text-muted-foreground">dhimanaditya56@gmail.com</p>
+              <p className="text-xs text-muted-foreground truncate">dhimanaditya56@gmail.com</p>
             </div>
           </BentoCard>
 
