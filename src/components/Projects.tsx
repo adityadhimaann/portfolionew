@@ -157,7 +157,7 @@ const Projects = () => {
 
 const ProjectCard = ({ project }: { project: Project }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const { ref: tiltRef, onMouseMove, onMouseLeave: onTiltLeave } = useTilt(10);
+  const { ref: tiltRef, onMouseMove, onMouseLeave: onTiltLeave } = useTilt(15);
 
   const handleMouseLeave = () => {
     setIsHovered(false);
@@ -172,92 +172,110 @@ const ProjectCard = ({ project }: { project: Project }) => {
         setIsHovered(true);
       }}
       onMouseLeave={handleMouseLeave}
-      className="glass-card group w-[min(80vw,500px)] flex-shrink-0 cursor-pointer overflow-hidden"
+      className="group w-[min(85vw,500px)] flex-shrink-0 cursor-pointer relative"
       style={{ transformStyle: "preserve-3d" }}
     >
-      {/* Image or Video */}
-      <div className="relative aspect-[16/10] overflow-hidden">
-        {project.video ? (
-          <video
-            src={project.video}
-            className="h-full w-full object-cover"
-            autoPlay
-            loop
-            muted
-            playsInline
-            style={{ objectFit: "cover" }}
-          />
-        ) : (
-          <motion.img
-            src={project.image}
-            alt={project.title}
-            className="h-full w-full object-cover"
-            animate={{ scale: isHovered ? 1.08 : 1 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            loading="lazy"
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
-
-        {/* Overlay links */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isHovered ? 1 : 0 }}
-          className="absolute inset-0 flex items-center justify-center gap-3 bg-background/40 backdrop-blur-sm"
-        >
-          {project.demo && (
-            <a
-              href={project.demo}
-              className="flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
-              aria-label={`View demo of ${project.title}`}
-            >
-              <ExternalLink size={14} /> Demo
-            </a>
-          )}
-          {project.github && (
-            <a
-              href={project.github}
-              className="flex items-center gap-2 rounded-full border border-foreground/20 bg-background/80 px-4 py-2 text-sm font-semibold text-foreground"
-              aria-label={`View source of ${project.title}`}
-            >
-              <Github size={14} /> Code
-            </a>
-          )}
-        </motion.div>
-      </div>
-
-      {/* Info */}
-      <div className="p-5" style={{ transform: "translateZ(30px)" }}>
-        <div className="flex items-start justify-between">
-          <h3 className="font-display text-lg font-bold text-foreground">{project.title}</h3>
-          {project.featured && (
-            <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
-              Featured
-            </span>
-          )}
-        </div>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
-        <div className="mt-4 flex flex-wrap gap-1.5">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-md bg-secondary px-2 py-0.5 text-[11px] font-medium text-secondary-foreground"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Shine effect */}
-      <motion.div
-        className="pointer-events-none absolute inset-0"
-        animate={{
-          background: isHovered
-            ? "linear-gradient(105deg, transparent 40%, hsl(38 92% 55% / 0.05) 45%, transparent 50%)"
-            : "none",
+      {/* Deep 3D Outer Glow - Replaced with box-shadow for performance */}
+      <div
+        className="absolute -inset-1 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          boxShadow: "0 0 50px -10px rgba(245, 158, 11, 0.4)",
+          transform: "translateZ(-10px)"
         }}
       />
+
+      {/* Main Glass Container */}
+      <div 
+        className="relative h-full w-full overflow-hidden rounded-2xl border border-white/10 bg-[#121212] shadow-2xl transition-colors duration-500 group-hover:border-primary/40 group-hover:bg-[#1A1A1A]"
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        {/* Image/Video Container */}
+        <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-white/5 bg-black" style={{ transform: "translateZ(10px)" }}>
+          {project.video ? (
+            <video
+              src={project.video}
+              className="h-full w-full object-cover opacity-80 transition-transform duration-700 ease-out group-hover:scale-105"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+          ) : (
+            <img
+              src={project.image}
+              alt={project.title}
+              className="h-full w-full object-cover opacity-80 transition-transform duration-700 ease-out group-hover:scale-105"
+              loading="lazy"
+            />
+          )}
+          
+          {/* Richer gradient overlay matching bottom black base */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/50 to-transparent pointer-events-none" />
+
+          {/* Overlay links - pushed strongly to the front in 3D */}
+          <div
+            className="absolute inset-0 flex items-center justify-center gap-4 bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            style={{ transform: "translateZ(60px)" }}
+          >
+            {project.demo && (
+              <a
+                href={project.demo}
+                className="flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-[0_0_20px_rgba(245,158,11,0.5)] transition-transform hover:scale-105"
+                aria-label={`View demo of ${project.title}`}
+              >
+                <ExternalLink size={16} /> Demo
+              </a>
+            )}
+            {project.github && (
+              <a
+                href={project.github}
+                className="flex items-center gap-2 rounded-full border border-white/20 bg-black/80 px-5 py-2.5 text-sm font-bold text-white transition-transform hover:scale-105 hover:bg-white/20"
+                aria-label={`View source of ${project.title}`}
+              >
+                <Github size={16} /> Code
+              </a>
+            )}
+          </div>
+        </div>
+
+        {/* Info Container - pops out strongly! */}
+        <div className="p-6 sm:p-8" style={{ transform: "translateZ(30px)" }}>
+          <div className="flex items-start justify-between">
+            <h3 className="font-display text-2xl font-bold text-white tracking-tight">
+              {project.title}
+            </h3>
+            {project.featured && (
+              <span className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary shadow-[0_0_10px_rgba(245,158,11,0.2)]">
+                Featured
+              </span>
+            )}
+          </div>
+          
+          <p className="mt-3 text-sm leading-relaxed text-zinc-400 line-clamp-3">
+            {project.description}
+          </p>
+          
+          <div className="mt-6 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-zinc-300 transition-colors group-hover:border-primary/30 group-hover:text-white"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Holographic Shine effect overlay - Optimized */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+          style={{
+            background: "linear-gradient(115deg, transparent 20%, rgba(245, 158, 11, 0.1) 40%, rgba(255, 255, 255, 0.05) 50%, rgba(245, 158, 11, 0.1) 60%, transparent 80%)",
+            transform: "translateZ(40px)" 
+          }}
+        />
+      </div>
     </div>
   );
 };
