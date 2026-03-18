@@ -216,7 +216,7 @@ const Contact = () => {
               {[
                 { label: "GitHub", url: "https://github.com/adityadhimaann" },
                 { label: "LinkedIn", url: "https://www.linkedin.com/in/adityadhimaann" },
-                
+                { label: "LeetCode", url: "https://leetcode.com/u/adityadhimaann/" },
               ].map((social) => (
                 <AnimatedButton
                   key={social.label}

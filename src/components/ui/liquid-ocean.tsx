@@ -168,8 +168,8 @@ export interface LiquidOceanProps {
 export function LiquidOcean({
   children,
   className,
-  backgroundColor = 0x020210,
-  accentColor = 0x4466ff,
+  backgroundColor = 0x100800,
+  accentColor = 0xf59e0b,
   boatCount = 5,
   speed = 1,
 }: LiquidOceanProps) {
@@ -184,7 +184,7 @@ export function LiquidOcean({
         scale: 0.6 + Math.random() * 0.8,
         speedMul: 0.7 + Math.random() * 0.6,
         phase: Math.random() * Math.PI * 2,
-        color: new THREE.Color().setHSL(0.6 + Math.random() * 0.15, 0.3, 0.15 + Math.random() * 0.1),
+        color: new THREE.Color().setHSL(0.08 + Math.random() * 0.05, 0.4, 0.15 + Math.random() * 0.1),
       });
     }
     return arr;
@@ -207,7 +207,7 @@ export function LiquidOcean({
 
           {/* Ambient + directional fill */}
           <ambientLight intensity={0.15} />
-          <directionalLight position={[5, 8, 5]} intensity={0.4} color={0x8899cc} />
+          <directionalLight position={[5, 8, 5]} intensity={0.4} color={0xcc9944} />
 
           {/* Ocean surface */}
           <Ocean color={backgroundColor} speed={speed} />
