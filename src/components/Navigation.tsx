@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, User, Code, Briefcase, Award, Mail, Terminal, Medal } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
@@ -21,10 +21,20 @@ const Navigation = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [scrollY, setScrollY] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
+      
+      // Auto-appear on scroll logic
+      setIsScrolling(true);
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+      scrollTimeout.current = setTimeout(() => {
+        setIsScrolling(false);
+      }, 250); // Near-instant hiding after scrolling stops
+
       const sections = navItems.map((item) => item.href.slice(1));
       let currentSection = "";
       for (const id of [...sections].reverse()) {
@@ -137,29 +147,32 @@ const Navigation = () => {
             animate={{ opacity: 1, x: 0, y: "-50%" }}
             exit={{ opacity: 0, x: 100, y: "-50%" }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="fixed right-6 top-1/2 z-50 hidden md:flex flex-col gap-3 p-3 rounded-full bg-zinc-200/80 dark:bg-black/40 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-2xl"
+            className="fixed right-0 top-1/2 z-50 hidden md:flex h-[70vh] w-12 items-center justify-end group pointer-events-auto"
           >
-            {navItems.map((item, idx) => {
-              const isActive = activeIndex === idx;
-              return (
-                <motion.button
-                  key={item.href}
-                  onClick={() => scrollTo(item.href)}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className={`group relative flex items-center justify-center p-3 rounded-full transition-colors ${
-                    isActive
-                      ? "bg-primary text-primary-foreground shadow-[0_0_15px_rgba(245,158,11,0.5)]"
-                      : "text-zinc-500 dark:text-zinc-400 hover:bg-black/5 dark:hover:bg-white/10 hover:text-neutral-900 dark:hover:text-white"
-                  }`}
-                >
-                  {item.icon}
-                  <span className="absolute right-full mr-4 px-3 py-1.5 rounded-lg bg-white/90 dark:bg-black/90 backdrop-blur-md border border-black/10 dark:border-white/10 text-xs font-semibold text-zinc-900 dark:text-white opacity-0 -translate-x-4 pointer-events-none transition-all duration-200 group-hover:block group-hover:opacity-100 group-hover:translate-x-0 whitespace-nowrap">
-                    {item.label}
-                  </span>
-                </motion.button>
-              );
-            })}
+            {/* The Auto-Hiding Dock content */}
+            <div className={`flex flex-col gap-3 p-3 rounded-full bg-zinc-200/80 dark:bg-black/40 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-2xl transition-all duration-100 ease-out group-hover:-translate-x-6 group-hover:opacity-100 group-hover:shadow-[0_0_40px_rgba(245,158,11,0.15)] ${
+              isScrolling ? "-translate-x-6 opacity-100 shadow-[0_0_30px_rgba(0,0,0,0.2)]" : "translate-x-[65%] opacity-70"
+            }`}>
+              {navItems.map((item, idx) => {
+                const isActive = activeIndex === idx;
+                return (
+                  <button
+                    key={item.href}
+                    onClick={() => scrollTo(item.href)}
+                    className={`group/btn relative flex items-center justify-center p-3 rounded-full transition-all duration-300 hover:scale-110 active:scale-95 ${
+                      isActive
+                        ? "bg-primary text-primary-foreground shadow-[0_0_15px_rgba(245,158,11,0.5)]"
+                        : "text-zinc-500 dark:text-zinc-400 hover:bg-black/5 dark:hover:bg-white/10 hover:text-neutral-900 dark:hover:text-white"
+                    }`}
+                  >
+                    {item.icon}
+                    <span className="absolute right-full mr-4 px-3 py-1.5 rounded-lg bg-white/90 dark:bg-black/90 backdrop-blur-md border border-black/10 dark:border-white/10 text-xs font-semibold text-zinc-900 dark:text-white opacity-0 -translate-x-4 pointer-events-none transition-all duration-300 group-hover/btn:opacity-100 group-hover/btn:translate-x-0 whitespace-nowrap">
+                      {item.label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </motion.aside>
         )}
       </AnimatePresence>
