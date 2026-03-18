@@ -27,7 +27,7 @@ const Index = () => {
         {!loaded && <LoadingScreen onComplete={handleComplete} />}
       </AnimatePresence>
 
-      <div className="relative min-h-screen bg-background">
+      <div className="relative min-h-screen">
         <Navigation />
         <main>
           <Hero />
