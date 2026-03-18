@@ -33,7 +33,7 @@ const projects: Project[] = [
     description: "Scalable ed-tech platform with student registration, live lecture streaming via WebRTC, AI-powered assessment tutor, and centralized grading. Generated ₹25,000+ revenue.",
     tags: ["React", "TypeScript", "Node.js", "Socket.IO", "WebRTC", "GenAI"],
     image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80",
-    demo: "https://www.uniedplatform.vercel.app",
+    demo: "https://uniedplatform.vercel.app",
     github: "https://www.github.com/adityadhimaann/unied",
     category: "EdTech",
     featured: true,
