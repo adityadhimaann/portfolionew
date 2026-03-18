@@ -102,7 +102,7 @@ const CodingProfiles = () => {
     for (let i = 0; i < 90; i++) {
       particles.push({
         x: (Math.random() - 0.5) * 3000,
-        y: (Math.random() - 0.5) * 1800,
+        y: (Math.random() - 0.7) * 2500, // Shifted higher linearly to fill the darker top space
         z: Math.random() * 1500 + 100,
         vx: (Math.random() - 0.5) * 0.6,
         vy: -Math.random() * 0.6 - 0.2,
@@ -143,7 +143,13 @@ const CodingProfiles = () => {
         const p1 = project(line.x1, 350, line.z1 + ((time * 120) % 150), cx, cy);
         const p2 = project(line.x2, 350, line.z2 + ((time * 120) % 150), cx, cy);
         const avgZ = (line.z1 + line.z2) / 2 + ((time * 120) % 150);
-        const alpha = Math.max(0, 0.4 - avgZ * 0.00015);
+        const avgX = Math.abs((line.x1 + line.x2) / 2);
+        
+        // Fade out based on depth (Z) and sideways edges (X) for equal, smooth shadow blending
+        const zAlpha = Math.max(0, 0.5 - avgZ * 0.00015);
+        const xAlpha = Math.max(0, 1 - (avgX / 2000));
+        const alpha = zAlpha * xAlpha;
+        
         ctx.strokeStyle = `rgba(255, 200, 50, ${alpha})`;
         ctx.beginPath();
         ctx.moveTo(p1.sx, p1.sy);
@@ -164,22 +170,16 @@ const CodingProfiles = () => {
         // Wrap around
         if (p.z < 50) p.z = 1600;
         if (p.z > 1700) p.z = 100;
-        if (p.y < -950) { p.y = 950; p.char = codeChars[Math.floor(Math.random() * codeChars.length)]; }
+        if (p.y < -1700) { p.y = 800; p.char = codeChars[Math.floor(Math.random() * codeChars.length)]; }
         if (Math.abs(p.x) > 1550) p.vx *= -1;
 
         const proj = project(p.x, p.y, p.z, cx, cy);
         const alpha = Math.min(1.0, (0.8 / (p.z * 0.002)) * (0.6 + 0.4 * Math.sin(p.life)));
         const size = Math.max(14, 28 * proj.scale);
 
-        // Lightning Glow
-        ctx.shadowBlur = 20 * proj.scale;
-        ctx.shadowColor = `rgba(255, 200, 80, ${alpha})`;
-
         ctx.fillStyle = `rgba(255, 230, 120, ${alpha})`;
         ctx.font = `${size}px 'JetBrains Mono', 'Fira Code', monospace`;
         ctx.fillText(p.char, proj.sx, proj.sy);
-
-        ctx.shadowBlur = 0;
       }
 
       // Draw faint connections between close particles
@@ -218,11 +218,20 @@ const CodingProfiles = () => {
 
   return (
     <section id="coding-profiles" className="relative py-24 overflow-hidden">
+      {/* Symmetrical glowing ambient shadows for equal background lighting */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {/* Soft wide glow at the very top to balance the dark "upside" shadow */}
+        <div className="absolute -top-[150px] left-1/2 -translate-x-1/2 h-[400px] w-[80%] rounded-[100%] bg-primary/10 blur-[100px]" />
+        
+        {/* Symmetrical side glows */}
+        <div className="absolute left-[-100px] top-1/2 -translate-y-1/2 h-[400px] w-[400px] rounded-full bg-primary/5 blur-[120px]" />
+        <div className="absolute right-[-100px] top-1/2 -translate-y-1/2 h-[400px] w-[400px] rounded-full bg-primary/5 blur-[120px]" />
+      </div>
+
       {/* 3D code canvas background */}
       <canvas
         ref={canvasRef}
-        className="pointer-events-none absolute inset-0 w-full h-full"
-        style={{ opacity: 1 }}
+        className="pointer-events-none absolute inset-0 w-full h-full opacity-60"
       />
 
       <div className="container relative px-6 lg:px-12" ref={ref}>

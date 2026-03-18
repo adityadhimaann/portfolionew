@@ -33,12 +33,12 @@ const Index = () => {
           <Hero />
           <Marquee />
           <About />
+          <CodingProfiles />
           <BentoGrid />
           <Projects />
           <Services />
           <Experience />
           <Certificates />
-          <CodingProfiles />
           <Testimonials />
           <Contact />
         </main>

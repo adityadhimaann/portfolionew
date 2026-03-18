@@ -2,6 +2,8 @@ import { lazy, Suspense, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FlipFadeText } from "@/components/ui/flip-fade-text";
 import { LightLines } from "@/components/ui/light-lines";
+import { SiReact, SiNodedotjs, SiMongodb, SiTypescript, SiOpenai } from "react-icons/si";
+import { FaJava } from "react-icons/fa";
 
 const HeroScene = lazy(() => import("./HeroScene"));
 
@@ -86,46 +88,72 @@ const Hero = () => {
           Building scalable, user-centric web applications with modern technologies, GenAI integration, and clean architecture.
         </motion.p>
 
+        {/* Expert Skills */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.2, duration: 0.6 }}
-          className="mt-10 flex items-center justify-center gap-2 md:gap-4"
+          transition={{ delay: 2.0, duration: 0.6 }}
+          className="mx-auto mt-8 flex w-full max-w-5xl justify-center gap-3 sm:gap-4 px-4 overflow-x-auto pb-2 no-scrollbar"
+          style={{ WebkitOverflowScrolling: 'touch' }}
         >
-          <motion.a
+          {[
+            { icon: <SiReact size={18} />, name: "React Frameworks", color: "#61DAFB" },
+            { icon: <SiNodedotjs size={18} />, name: "Node.js backend", color: "#339933" },
+            { icon: <SiTypescript size={18} />, name: "TypeScript", color: "#3178C6" },
+            { icon: <SiOpenai size={18} />, name: "GenAI Integration", color: "#10a37f" },
+            { icon: <FaJava size={18} />, name: "Java", color: "#f89820" },
+            { icon: <SiMongodb size={18} />, name: "MongoDB", color: "#47A248" }
+          ].map((skill, index) => (
+            <motion.div
+              key={skill.name}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 2.1 + index * 0.1, type: "spring", stiffness: 100 }}
+              whileHover={{ scale: 1.05, borderColor: skill.color }}
+              className="flex flex-shrink-0 items-center gap-2 rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-4 py-2 shadow-sm dark:shadow-lg backdrop-blur-md transition-colors whitespace-nowrap"
+            >
+              <span style={{ color: skill.color }}>{skill.icon}</span>
+              <span className="text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300">{skill.name}</span>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 3.0, duration: 0.6 }}
+          className="mt-10 mx-auto inline-flex items-center justify-center p-1.5 sm:p-2 gap-1 sm:gap-2 rounded-full border border-primary/40 bg-zinc-200/50 dark:bg-black/40 backdrop-blur-xl shadow-[0_0_20px_rgba(245,158,11,0.15)] max-w-full overflow-x-auto no-scrollbar"
+        >
+          <a
             href="#projects"
             onClick={(e) => {
               e.preventDefault();
               document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" });
             }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="rounded-full bg-primary px-4 py-2 text-xs md:px-7 md:py-3 md:text-sm font-semibold text-primary-foreground shadow-lg whitespace-nowrap"
+            className="flex-shrink-0 rounded-full px-4 py-2.5 sm:px-6 sm:py-3 text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 transition-colors hover:bg-primary/10 hover:text-primary whitespace-nowrap"
           >
             View Work
-          </motion.a>
-          <motion.a
+          </a>
+          
+          <a
             href="#about"
             onClick={(e) => {
               e.preventDefault();
               document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
             }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="rounded-full border border-border px-4 py-2 text-xs md:px-7 md:py-3 md:text-sm font-semibold text-foreground whitespace-nowrap"
+            className="flex-shrink-0 rounded-full px-4 py-2.5 sm:px-6 sm:py-3 text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 transition-colors hover:bg-primary/10 hover:text-primary whitespace-nowrap"
           >
             About Me
-          </motion.a>
-          <motion.a
+          </a>
+          
+          <a
             href="/AdityaCV_SDE.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="rounded-full border border-primary/50 bg-primary/10 px-4 py-2 text-xs md:px-7 md:py-3 md:text-sm font-semibold text-primary shadow-lg whitespace-nowrap"
+            className="flex-shrink-0 rounded-full px-4 py-2.5 sm:px-6 sm:py-3 text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 transition-colors hover:bg-primary/10 hover:text-primary whitespace-nowrap"
           >
             View Resume
-          </motion.a>
+          </a>
         </motion.div>
       </motion.div>
     </section>
