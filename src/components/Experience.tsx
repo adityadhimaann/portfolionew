@@ -30,8 +30,7 @@ const Experience = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section id="experience" className="relative py-32">
-      <div className="pointer-events-none absolute inset-0" style={{ background: "var(--gradient-bg)" }} />
+    <section id="experience" className="relative pt-8 pb-32">
       <div className="container relative px-6 lg:px-12" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 40 }}

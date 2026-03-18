@@ -30,9 +30,7 @@ const Services = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
-    <section id="services" className="relative py-32">
-      {/* Subtle gradient bg */}
-      <div className="pointer-events-none absolute inset-0" style={{ background: "var(--gradient-bg)" }} />
+    <section id="services" className="relative pt-32 pb-20">
 
       <div className="container relative px-6 lg:px-12" ref={ref}>
         <motion.div

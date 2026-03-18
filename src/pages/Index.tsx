@@ -6,6 +6,7 @@ import Marquee from "@/components/Marquee";
 import About from "@/components/About";
 import Projects from "@/components/Projects";
 import Services from "@/components/Services";
+import AdBanner from "@/components/AdBanner";
 import Experience from "@/components/Experience";
 import Certificates from "@/components/Certificates";
 import CodingProfiles from "@/components/LeetCodeStats";
@@ -36,8 +37,13 @@ const Index = () => {
           <CodingProfiles />
           <BentoGrid />
           <Projects />
-          <Services />
-          <Experience />
+          <div className="relative">
+            {/* Unified background attaching Services, AdBanner, and Experience */}
+            <div className="pointer-events-none absolute w-full h-full inset-0" style={{ background: "var(--gradient-bg)" }} />
+            <Services />
+            <AdBanner />
+            <Experience />
+          </div>
           <Certificates />
           <Testimonials />
           <Contact />
