@@ -39,7 +39,6 @@ const Certificates = () => {
 
   return (
     <section id="certificates" className="relative py-32">
-      <div className="pointer-events-none absolute inset-0" style={{ background: "var(--gradient-bg)" }} />
       <div className="container relative px-6 lg:px-12" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 40 }}

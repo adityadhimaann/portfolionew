@@ -30,25 +30,23 @@ const Index = () => {
 
       <div className="relative min-h-screen">
         <Navigation />
-        <main>
+        <main className="relative">
+          {/* Unified background attaching all sections across the entire website */}
+          <div className="pointer-events-none absolute w-full h-full inset-0" style={{ background: "var(--gradient-bg)" }} />
           <Hero />
           <Marquee />
           <About />
           <CodingProfiles />
           <BentoGrid />
           <Projects />
-          <div className="relative">
-            {/* Unified background attaching Services, AdBanner, and Experience */}
-            <div className="pointer-events-none absolute w-full h-full inset-0" style={{ background: "var(--gradient-bg)" }} />
-            <Services />
-            <AdBanner />
-            <Experience />
-          </div>
+          <Services />
+          <AdBanner />
+          <Experience />
           <Certificates />
           <Testimonials />
           <Contact />
+          <Footer />
         </main>
-        <Footer />
       </div>
     </>
   );

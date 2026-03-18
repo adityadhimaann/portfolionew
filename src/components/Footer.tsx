@@ -5,7 +5,7 @@ const Footer = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
-    <footer className="border-t border-border py-12">
+    <footer className="py-12">
       <div className="container flex flex-col items-center justify-between gap-6 px-6 sm:flex-row lg:px-12">
         <div className="flex items-center gap-2">
           <span className="font-display text-lg font-bold gradient-text">AK</span>

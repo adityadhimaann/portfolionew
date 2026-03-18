@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Send, Mail, MapPin, Copy, Check } from "lucide-react";
-import { LiquidOcean } from "@/components/ui/liquid-ocean";
 import AnimatedButton from "@/components/ui/animated-button";
 import emailjs from '@emailjs/browser';
 
@@ -80,8 +79,7 @@ const Contact = () => {
 
   return (
     <section id="contact" className="relative">
-      <LiquidOcean className="w-full bg-black">
-      <div className="container px-6 py-32 lg:px-12" ref={ref}>
+      <div className="container px-6 py-32 lg:px-12 mx-auto" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -115,7 +113,7 @@ const Contact = () => {
                   htmlFor={field.id}
                   className={`absolute left-4 transition-all duration-300 ${
                     focused === field.id || formData[field.id as keyof typeof formData]
-                      ? "-top-2.5 text-xs text-primary bg-black px-1"
+                      ? "-top-2.5 text-xs text-primary bg-[#050505] px-1"
                       : "top-3.5 text-sm text-gray-400"
                   }`}
                 >
@@ -139,7 +137,7 @@ const Contact = () => {
                 htmlFor="message"
                 className={`absolute left-4 transition-all duration-300 ${
                   focused === "message" || formData.message
-                    ? "-top-2.5 text-xs text-primary bg-black px-1"
+                    ? "-top-2.5 text-xs text-primary bg-[#050505] px-1"
                     : "top-3.5 text-sm text-gray-400"
                 }`}
               >
@@ -230,7 +228,6 @@ const Contact = () => {
           </motion.div>
         </div>
       </div>
-      </LiquidOcean>
     </section>
   );
 };

@@ -218,15 +218,6 @@ const CodingProfiles = () => {
 
   return (
     <section id="coding-profiles" className="relative py-24 overflow-hidden">
-      {/* Symmetrical glowing ambient shadows for equal background lighting */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        {/* Soft wide glow at the very top to balance the dark "upside" shadow */}
-        <div className="absolute -top-[150px] left-1/2 -translate-x-1/2 h-[400px] w-[80%] rounded-[100%] bg-primary/10 blur-[100px]" />
-        
-        {/* Symmetrical side glows */}
-        <div className="absolute left-[-100px] top-1/2 -translate-y-1/2 h-[400px] w-[400px] rounded-full bg-primary/5 blur-[120px]" />
-        <div className="absolute right-[-100px] top-1/2 -translate-y-1/2 h-[400px] w-[400px] rounded-full bg-primary/5 blur-[120px]" />
-      </div>
 
       {/* 3D code canvas background */}
       <canvas

@@ -57,6 +57,8 @@ function Ocean({ color = 0x0a0a2e, speed = 1 }: OceanProps) {
         metalness={0.2}
         roughness={0.6}
         side={THREE.DoubleSide}
+        transparent={true}
+        opacity={0.4}
       />
     </mesh>
   );
@@ -195,14 +197,17 @@ export function LiquidOcean({
   return (
     <div className={cn("relative overflow-hidden", className)}>
       {/* Three.js canvas – fills parent absolutely */}
-      <div className="absolute inset-0" style={{ pointerEvents: "none" }}>
+      <div className="absolute inset-0" style={{ 
+        pointerEvents: "none", 
+        WebkitMaskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
+        maskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)"
+      }}>
         <Canvas
-          gl={{ antialias: false, alpha: false, powerPreference: "high-performance" }}
+          gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
           dpr={[1, 1]}
           frameloop="always"
           style={{ width: "100%", height: "100%" }}
         >
-          <color attach="background" args={[bgColor.r, bgColor.g, bgColor.b]} />
           <fog attach="fog" args={[bgColor, 10, 35]} />
 
           {/* Ambient + directional fill */}
