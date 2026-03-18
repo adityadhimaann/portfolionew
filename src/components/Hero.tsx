@@ -38,7 +38,7 @@ const Hero = () => {
         className="pointer-events-none absolute -bottom-40 right-1/4 h-[400px] w-[400px] rounded-full bg-primary/5 blur-[100px] animate-pulse-glow animation-delay-200"
       />
 
-      <motion.div style={{ opacity }} className="container relative z-10 px-6 text-center lg:px-12">
+      <motion.div style={{ opacity }} className="container relative z-10 px-6 text-center lg:px-12 pt-20 md:pt-24 pb-10">
         {/* Profile image – all screens */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -61,7 +61,7 @@ const Hero = () => {
             words={["Aditya Kumar"]}
             interval={4000}
             className="min-h-0 w-full"
-            textClassName="text-fluid-xl font-display font-extrabold tracking-tight text-foreground !text-2xl xs:!text-3xl sm:!text-4xl md:!text-5xl lg:!text-6xl xl:!text-7xl"
+            textClassName="font-display font-extrabold tracking-tight text-foreground !text-3xl sm:!text-4xl md:!text-5xl lg:!text-6xl"
             letterDuration={0.6}
             staggerDelay={0.08}
             exitStaggerDelay={0.04}
@@ -122,7 +122,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 3.0, duration: 0.6 }}
-          className="mt-10 mx-auto inline-flex items-center justify-center p-1.5 sm:p-2 gap-1 sm:gap-2 rounded-full border border-primary/40 bg-zinc-200/50 dark:bg-black/40 backdrop-blur-xl shadow-[0_0_20px_rgba(245,158,11,0.15)] max-w-full overflow-x-auto no-scrollbar"
+          className="mt-10 mx-auto inline-flex items-center justify-center px-1.5 py-1 sm:px-2 sm:py-1.5 gap-1 sm:gap-2 rounded-full border border-primary/40 bg-zinc-200/50 dark:bg-black/40 backdrop-blur-xl shadow-[0_0_20px_rgba(245,158,11,0.15)] max-w-full overflow-x-auto no-scrollbar"
         >
           <a
             href="#projects"
@@ -130,7 +130,7 @@ const Hero = () => {
               e.preventDefault();
               document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" });
             }}
-            className="flex-shrink-0 rounded-full px-4 py-2.5 sm:px-6 sm:py-3 text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 transition-colors hover:bg-primary/10 hover:text-primary whitespace-nowrap"
+            className="flex-shrink-0 rounded-full px-4 py-1.5 sm:px-6 sm:py-2 text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 transition-colors hover:bg-primary/10 hover:text-primary whitespace-nowrap"
           >
             View Work
           </a>
@@ -141,7 +141,7 @@ const Hero = () => {
               e.preventDefault();
               document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
             }}
-            className="flex-shrink-0 rounded-full px-4 py-2.5 sm:px-6 sm:py-3 text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 transition-colors hover:bg-primary/10 hover:text-primary whitespace-nowrap"
+            className="flex-shrink-0 rounded-full px-4 py-1.5 sm:px-6 sm:py-2 text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 transition-colors hover:bg-primary/10 hover:text-primary whitespace-nowrap"
           >
             About Me
           </a>
@@ -150,7 +150,7 @@ const Hero = () => {
             href="/AdityaCV_SDE.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-shrink-0 rounded-full px-4 py-2.5 sm:px-6 sm:py-3 text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 transition-colors hover:bg-primary/10 hover:text-primary whitespace-nowrap"
+            className="flex-shrink-0 rounded-full px-4 py-1.5 sm:px-6 sm:py-2 text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300 transition-colors hover:bg-primary/10 hover:text-primary whitespace-nowrap"
           >
             View Resume
           </a>
