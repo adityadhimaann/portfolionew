@@ -6,10 +6,10 @@ const AdBanner = () => {
 
   const containerVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut", staggerChildren: 0.15 } 
+      transition: { duration: 0.8, ease: "easeOut", staggerChildren: 0.15 }
     }
   } as any;
 
@@ -37,20 +37,20 @@ const AdBanner = () => {
 
           {/* Left Column - Text content */}
           <div className="flex flex-col justify-center p-10 sm:p-14 lg:p-24 w-full md:w-[50%] lg:w-[55%] z-10 relative bg-transparent backdrop-blur-sm">
-            <motion.h2 
+            <motion.h2
               variants={itemVariants}
               className="text-[2.5rem] sm:text-5xl lg:text-[4rem] font-sans font-extrabold leading-[1.05] tracking-tight text-white mb-6"
             >
               Clean Code.<br />
               <span className="text-zinc-300">Fast Delivery.</span>
             </motion.h2>
-            
-            <motion.div 
+
+            <motion.div
               variants={lineVariants}
-              className="h-1.5 bg-gradient-to-r from-primary to-amber-300 mb-8 rounded-full shadow-[0_0_15px_rgba(245,158,11,0.6)]" 
+              className="h-1.5 bg-gradient-to-r from-primary to-amber-300 mb-8 rounded-full shadow-[0_0_15px_rgba(245,158,11,0.6)]"
             />
-            
-            <motion.p 
+
+            <motion.p
               variants={itemVariants}
               className="text-lg sm:text-xl text-zinc-400 max-w-sm lg:max-w-md font-medium leading-[1.6]"
             >

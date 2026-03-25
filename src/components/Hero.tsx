@@ -49,7 +49,7 @@ const Hero = () => {
           <div className="relative">
             <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-primary/60 via-primary/20 to-transparent blur-md" />
             <img
-              src="/adidevworks.jpeg"
+              src="/b.png"
               alt="Aditya Kumar"
               className="relative h-72 w-72 rounded-full object-cover border-2 border-primary/30 shadow-xl"
             />
